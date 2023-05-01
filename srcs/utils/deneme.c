@@ -71,37 +71,27 @@ void	list_remove(t_list **lst, int x, int y)
 {
 	t_list *prev;
 	t_list *holder;
-	t_list *curr;
 	t_obj  *obj;
 
 	prev = *lst;
-	curr = *lst;
-	while (curr)
+	holder = *lst;
+	obj = holder->strct;
+	if (holder && obj->x == x && obj->y == y)
 	{
-		obj = curr->strct;
+		*lst = (*lst)->next;
+		holder = ft_free(holder);  // strct kısmını freelemeyi unutma!
+		return;
+	}
+	while (holder)
+	{
+		obj = holder->strct;
 		if (obj->x == x && obj->y == y)
 		{
-			holder = curr;
-			curr = curr->next;
 			prev->next = holder->next;
 			holder = ft_free(holder);  // strct kısmını freelemeyi unutma!
-			break;
+			return;
 		}
-		prev = curr;
-		curr = curr->next;
-
-		/*
-		else if (prev->next)
-		{
-			obj = prev->next->strct;
-			if (obj->x == x && obj->y == y)
-			{
-				holder = prev->next;
-				prev->next = holder->next;
-				holder = ft_free(holder);  // strct kısmını freelemeyi unutma!
-				break;
-			}
-		}*/
-		
+		prev = holder;
+		holder = holder->next;
 	}
 }
