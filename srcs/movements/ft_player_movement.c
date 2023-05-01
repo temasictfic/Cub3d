@@ -72,40 +72,26 @@ void	ft_move_player(t_vars *vars)
 	}
 }
 
-int	key_press(int keycode, t_vars *vars)
+int	key_actions(int keycode, t_vars *vars)
 {
-	if (keycode == KEY_A)
-		vars->player.move.x = -1;
-	else if (keycode == KEY_W || keycode == KEY_UP)
-		vars->player.move.y = -1;
-	else if (keycode == KEY_D)
-		vars->player.move.x = 1;
-	else if (keycode == KEY_S || keycode == KEY_DOWN)
-		vars->player.move.y = 1;
-	else if (keycode == KEY_LEFT)
-		vars->player.rotate = -1;
-	else if (keycode == KEY_RIGHT)
-		vars->player.rotate = 1;
-	else if (keycode == KEY_E)
+	vars->player.move.x ^= (keycode == KEY_A - keycode == KEY_D);
+	vars->player.move.y ^= (keycode == KEY_W - keycode == KEY_S);
+	vars->player.rotate ^= (keycode == KEY_Q - keycode == KEY_E);
+	if (keycode == KEY_ENTER)
 		ft_open_close_door(vars);
 	else if (keycode == KEY_ESC)
 		ft_exit_game(vars, EXIT_SUCCESS);
 	return (0);
 }
 
+/*
 int	key_release(int keycode, t_vars *vars)
 {
-	if (keycode == KEY_A)
+	if (keycode == KEY_A || keycode == KEY_D)
 		vars->player.move.x = 0;
-	else if (keycode == KEY_W || keycode == KEY_UP)
+	else if (keycode == KEY_W || keycode == KEY_S)
 		vars->player.move.y = 0;
-	else if (keycode == KEY_D)
-		vars->player.move.x = 0;
-	else if (keycode == KEY_S || keycode == KEY_DOWN)
-		vars->player.move.y = 0;
-	else if (keycode == KEY_LEFT)
-		vars->player.rotate = 0;
-	else if (keycode == KEY_RIGHT)
+	else if (keycode == KEY_LEFT || keycode == KEY_RIGHT)
 		vars->player.rotate = 0;
 	return (0);
-}
+}*/
