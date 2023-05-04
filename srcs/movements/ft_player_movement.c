@@ -6,7 +6,7 @@
 /*   By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 22:27:23 by hel-makh          #+#    #+#             */
-/*   Updated: 2023/04/15 17:01:04 by sciftci          ###   ########.fr       */
+/*   Updated: 2023/05/04 22:28:08 by sciftci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,26 +72,34 @@ void	ft_move_player(t_vars *vars)
 	}
 }
 
-int	key_actions(int keycode, t_vars *vars)
+int	key_press(int keycode, t_vars *vars)
 {
-	vars->player.move.x ^= (keycode == KEY_A - keycode == KEY_D);
-	vars->player.move.y ^= (keycode == KEY_W - keycode == KEY_S);
-	vars->player.rotate ^= (keycode == KEY_Q - keycode == KEY_E);
-	if (keycode == KEY_ENTER)
+	if (keycode == KEY_A)
+		vars->player.move.x = -1;
+	else if (keycode == KEY_D)
+		vars->player.move.x = 1;
+	else if (keycode == KEY_W)
+		vars->player.move.y = -1;
+	else if (keycode == KEY_S)
+		vars->player.move.y = 1;
+	else if (keycode == KEY_Q)
+		vars->player.rotate = -1;
+	else if (keycode == KEY_E)
+		vars->player.rotate = 1;
+	else if (keycode == KEY_F)
 		ft_open_close_door(vars);
 	else if (keycode == KEY_ESC)
 		ft_exit_game(vars, EXIT_SUCCESS);
 	return (0);
 }
 
-/*
 int	key_release(int keycode, t_vars *vars)
 {
 	if (keycode == KEY_A || keycode == KEY_D)
 		vars->player.move.x = 0;
 	else if (keycode == KEY_W || keycode == KEY_S)
 		vars->player.move.y = 0;
-	else if (keycode == KEY_LEFT || keycode == KEY_RIGHT)
+	else if (keycode == KEY_Q || keycode == KEY_E)
 		vars->player.rotate = 0;
 	return (0);
-}*/
+}
