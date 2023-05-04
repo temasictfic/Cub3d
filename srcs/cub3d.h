@@ -6,7 +6,7 @@
 /*   By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 11:43:14 by hel-makh          #+#    #+#             */
-/*   Updated: 2023/04/15 16:52:53 by sciftci          ###   ########.fr       */
+/*   Updated: 2023/05/04 22:29:44 by sciftci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ enum e_keycodes {
 	KEY_D = 2,
 	KEY_S = 1,
 	KEY_E = 14,
+	KEY_F = 3,
+	KEY_Q = 12,
 	KEY_LEFT = 123,
 	KEY_UP = 126,
 	KEY_RIGHT = 124,
@@ -160,7 +162,7 @@ typedef struct s_player {
 	t_coor	pos;
 	double	angle;
 	t_coor	dir;
-	t_coor	move;
+	t_coor move;
 	double	rotate;
 }	t_player;
 
