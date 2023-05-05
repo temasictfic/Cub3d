@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_textures.c                                  :+:      :+:    :+:   */
+/*   get_textures.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 12:00:44 by hel-makh          #+#    #+#             */
-/*   Updated: 2023/05/05 22:58:20 by sciftci          ###   ########.fr       */
+/*   Updated: 2023/05/05 23:42:49 by sciftci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-static int	ft_get_rgb_colors(int *color, char **info)
+static int	get_rgb_colors(int *color, char **info)
 {
 	char	**arr;
 	int		rgb[3];
@@ -34,7 +34,7 @@ static int	ft_get_rgb_colors(int *color, char **info)
 	return (1);
 }
 
-static int	ft_open_image(t_vars *vars, t_img *img, char *path)
+static int	open_image(t_vars *vars, t_img *img, char *path)
 {
 	img->img = mlx_xpm_file_to_image(vars->mlx.mlx, path,
 			&img->width, &img->height);
@@ -45,8 +45,7 @@ static int	ft_open_image(t_vars *vars, t_img *img, char *path)
 	return (1);
 }
 
-static int
-	ft_get_sprite(t_vars *vars, t_spr *sprite, char **paths)
+static int get_sprite(t_vars *vars, t_spr *sprite, char **paths)
 {
 	int	i;
 
@@ -57,31 +56,31 @@ static int
 	i = 0;
 	while (paths[i])
 	{
-		if (!ft_open_image(vars, &sprite->img[i], paths[i]))
+		if (!open_image(vars, &sprite->img[i], paths[i]))
 			return (0);
 		i ++;
 	}
 	return (1);
 }
 
-int	ft_get_textures(t_vars *vars, char **info)
+int	get_textures(t_vars *vars, char **info)
 {
 	if (!ft_strcmp(info[0], "NO"))
-		return (ft_open_image(vars, &vars->map.north, info[1]));
+		return (open_image(vars, &vars->map.north, info[1]));
 	else if (!ft_strcmp(info[0], "SO"))
-		return (ft_open_image(vars, &vars->map.south, info[1]));
+		return (open_image(vars, &vars->map.south, info[1]));
 	else if (!ft_strcmp(info[0], "WE"))
-		return (ft_open_image(vars, &vars->map.west, info[1]));
+		return (open_image(vars, &vars->map.west, info[1]));
 	else if (!ft_strcmp(info[0], "EA"))
-		return (ft_open_image(vars, &vars->map.east, info[1]));
+		return (open_image(vars, &vars->map.east, info[1]));
 	else if (!ft_strcmp(info[0], "CO"))
-		return (ft_get_sprite(vars, &vars->map.collectible, &info[1]));
+		return (get_sprite(vars, &vars->map.collectible, &info[1]));
 	else if (!ft_strcmp(info[0], "DO"))
-		return (ft_get_sprite(vars, &vars->map.door, &info[1]));
+		return (get_sprite(vars, &vars->map.door, &info[1]));
 	else if (!ft_strcmp(info[0], "F"))
-		return (ft_get_rgb_colors(&vars->map.fl_color, info));
+		return (get_rgb_colors(&vars->map.fl_color, info));
 	else if (!ft_strcmp(info[0], "C"))
-		return (ft_get_rgb_colors(&vars->map.ce_color, info));
+		return (get_rgb_colors(&vars->map.ce_color, info));
 	printf("Error\nInvalid texture information [%s].\n", info[0]);
 	return (0);
 }

@@ -6,13 +6,13 @@
 /*   By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 10:27:22 by ybensell          #+#    #+#             */
-/*   Updated: 2023/05/05 23:11:25 by sciftci          ###   ########.fr       */
+/*   Updated: 2023/05/06 00:00:02 by sciftci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-static t_coor	ft_intersec_y(t_coor pos, double angle)
+static t_coor	intersec_y(t_coor pos, double angle)
 {
 	t_coor	tmp;
 
@@ -25,7 +25,7 @@ static t_coor	ft_intersec_y(t_coor pos, double angle)
 	return (tmp);
 }
 
-static t_coor	ft_intersec_x(t_coor pos, double angle)
+static t_coor	intersec_x(t_coor pos, double angle)
 {
 	t_coor	tmp;
 
@@ -63,14 +63,14 @@ static t_coor	get_intersect_pt(t_vars *vars, t_coor start_pos,
 	return (first_inter);
 }
 
-t_coor	ft_get_hit_wall(t_vars *vars, t_coor start_pos,
+t_coor	get_hit_wall(t_vars *vars, t_coor start_pos,
 	double angle, int *direction)
 {
 	t_coor	x_wall;
 	t_coor	y_wall;
 
-	x_wall = get_intersect_pt(vars, start_pos, angle, &ft_intersec_x);
-	y_wall = get_intersect_pt(vars, start_pos, angle, &ft_intersec_y);
+	x_wall = get_intersect_pt(vars, start_pos, angle, &intersec_x);
+	y_wall = get_intersect_pt(vars, start_pos, angle, &intersec_y);
 	if (get_distance(start_pos, x_wall) < get_distance(start_pos, y_wall))
 	{		
 		if (direction)

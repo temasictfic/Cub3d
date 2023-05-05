@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_door_opening.c                                  :+:      :+:    :+:   */
+/*   door_opening.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:30:10 by hel-makh          #+#    #+#             */
-/*   Updated: 2023/05/05 23:11:15 by sciftci          ###   ########.fr       */
+/*   Updated: 2023/05/06 00:18:13 by sciftci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int	ft_door_frame(t_list *lst, int x, int y)
+int	door_frame(t_list *lst, int x, int y)
 {
 	t_obj *obj;
 	while (lst)
@@ -25,7 +25,7 @@ int	ft_door_frame(t_list *lst, int x, int y)
 	return (0);
 }
 
-void	ft_door_animation(t_vars *vars)
+void	door_animation(t_vars *vars)
 {
 	t_list *holder;
 	t_list *next_holder;
@@ -53,11 +53,11 @@ void	ft_door_animation(t_vars *vars)
 	}
 }
 
-void	ft_open_close_door(t_vars *vars)
+void	open_close_door(t_vars *vars)
 {
 	t_coor	door;
 
-	door = ft_get_hit_wall(vars, vars->player.pos, vars->player.angle, NULL);
+	door = get_hit_wall(vars, vars->player.pos, vars->player.angle, NULL);
 	if (!ft_strchr(DOORS, vars->map.map[(int)door.y][(int)door.x]))
 		return ;
 	door.x = (double)((int)door.x) + 0.5;
@@ -65,13 +65,13 @@ void	ft_open_close_door(t_vars *vars)
 	if (get_distance(vars->player.pos, door) > 2.0)
 		return ;
 	if (vars->map.map[(int)door.y][(int)door.x] == C_DOOR
-		&& ft_door_frame(vars->map.doors, door.x, door.y) == 0)
+		&& door_frame(vars->map.doors, door.x, door.y) == 0)
 	{
-		list_add_front(&vars->map.doors, list_new(ft_obj_new(door.x, door.y, 0)));
+		list_add_front(&vars->map.doors, list_new(obj_new(door.x, door.y, 0)));
 		vars->map.map[(int)door.y][(int)door.x] = O_DOOR;
 	}
 	else if (vars->map.map[(int)door.y][(int)door.x] == O_DOOR
-		&& ft_door_frame(vars->map.doors, door.x, door.y)
+		&& door_frame(vars->map.doors, door.x, door.y)
 			== vars->map.door.frames - 1)
 	{
 		vars->map.map[(int)door.y][(int)door.x] = C_DOOR;

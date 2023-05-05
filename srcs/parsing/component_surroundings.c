@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_component_surroundings.c                        :+:      :+:    :+:   */
+/*   component_surroundings.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 15:06:14 by hel-makh          #+#    #+#             */
-/*   Updated: 2023/04/15 16:54:39 by sciftci          ###   ########.fr       */
+/*   Updated: 2023/05/05 23:40:32 by sciftci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-static int	ft_is_component_surrounded(char **map, int i, int j)
+static int	is_component_surrounded(char **map, int i, int j)
 {
 	if (map[i][j + 1]
 		&& ft_strchr("0NSEWC", map[i][j + 1]))
@@ -31,7 +31,7 @@ static int	ft_is_component_surrounded(char **map, int i, int j)
 	return (0);
 }
 
-static int	ft_is_space_surrounded(char **map, int i, int j)
+static int	is_space_surrounded(char **map, int i, int j)
 {
 	if (!map[i][j + 1]
 		|| (map[i][j + 1]
@@ -58,7 +58,7 @@ static int	ft_is_space_surrounded(char **map, int i, int j)
 	return (0);
 }
 
-static int	ft_wall_right_placed(char **map, int i, int j)
+static int	wall_right_placed(char **map, int i, int j)
 {
 	if (map[i][j + 1] && map[i][j + 1] == WALL
 		&& j - 1 >= 0 && map[i][j - 1] == WALL
@@ -73,14 +73,14 @@ static int	ft_wall_right_placed(char **map, int i, int j)
 	return (0);
 }
 
-int	ft_component_surroundings(char **map, int i, int j)
+int	component_surroundings(char **map, int i, int j)
 {
-	if (map[i][j] == SPACE && ft_is_component_surrounded(map, i, j))
+	if (map[i][j] == SPACE && is_component_surrounded(map, i, j))
 		return (printf("Error\nInvalid map: misplaced [%c] space(s)."
 				"\nLine: %d, Column: %d\n", map[i][j], i + 1, j + 1), 0);
 	else if (ft_strchr("0NSEWC", map[i][j]))
 	{
-		if (ft_is_space_surrounded(map, i, j))
+		if (is_space_surrounded(map, i, j))
 		{
 			if (map[i][j] == EMPTY_SPACE)
 				printf("Error\nInvalid map: misplaced [%c] empty space(s)."
@@ -92,7 +92,7 @@ int	ft_component_surroundings(char **map, int i, int j)
 		}
 	}
 	else if ((map[i][j] == C_DOOR || map[i][j] == O_DOOR)
-		&& !ft_wall_right_placed(map, i, j))
+		&& !wall_right_placed(map, i, j))
 		return (printf("Error\nInvalid map: misplaced [%c] wall."
 				"\nLine: %d, Column: %d\n", map[i][j], i + 1, j + 1), 0);
 	return (1);

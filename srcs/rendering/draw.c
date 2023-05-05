@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_draw.c                                          :+:      :+:    :+:   */
+/*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:06:14 by hel-makh          #+#    #+#             */
-/*   Updated: 2023/05/05 23:12:30 by sciftci          ###   ########.fr       */
+/*   Updated: 2023/05/06 00:01:13 by sciftci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-static void	ft_draw_line(t_vars *vars, t_coor dest, t_circle minimap)
+static void	draw_line(t_vars *vars, t_coor dest, t_circle minimap)
 {
 	int		steps;
 	t_coor	inc;
@@ -39,7 +39,7 @@ static void	ft_draw_line(t_vars *vars, t_coor dest, t_circle minimap)
 	}
 }
 
-void	ft_draw_rays(t_vars *vars, t_circle minimap)
+void	draw_rays(t_vars *vars, t_circle minimap)
 {
 	double	degree;
 	double	angle;
@@ -50,15 +50,15 @@ void	ft_draw_rays(t_vars *vars, t_circle minimap)
 	{
 		angle = radian_operations(vars->player.angle,
 				deg_to_rad(degree - (FOV / 2)));
-		hit_wall = ft_get_hit_wall(vars, vars->player.pos, angle, NULL);
+		hit_wall = get_hit_wall(vars, vars->player.pos, angle, NULL);
 		while (vars->map.map[(int)hit_wall.y][(int)hit_wall.x] == O_DOOR)
-			hit_wall = ft_get_hit_wall(vars, hit_wall, angle, NULL);
-		ft_draw_line(vars, hit_wall, minimap);
+			hit_wall = get_hit_wall(vars, hit_wall, angle, NULL);
+		draw_line(vars, hit_wall, minimap);
 		degree += 2;
 	}
 }
 
-void	ft_draw_floor_ceilling(t_vars *vars)
+void	draw_floor_ceilling(t_vars *vars)
 {
 	int	x;
 	int	y;

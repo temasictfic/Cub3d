@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_frame_rendering.c                               :+:      :+:    :+:   */
+/*   frame_rendering.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 16:44:23 by hel-makh          #+#    #+#             */
-/*   Updated: 2023/05/05 21:18:39 by sciftci          ###   ########.fr       */
+/*   Updated: 2023/05/06 00:09:03 by sciftci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int	ft_init_images(t_vars *vars)
+int	init_images(t_vars *vars)
 {
 	vars->mlx.img.img = mlx_new_image(vars->mlx.mlx, WIDTH, HEIGHT);
 	if (!vars->mlx.img.img)
@@ -53,11 +53,11 @@ int	frame_rendering(t_vars *vars)
 	//ft_fps_counter(vars);
 	vars->mlx.fspeed = 0.045;
 	vars->mlx.fps = 40;
-	ft_move_player(vars);
-	ft_door_animation(vars);
-	ft_render_3d_scene(vars);
-	ft_render_sprites(vars);
-	ft_render_minimap(vars);
+	move_player(vars);
+	door_animation(vars);
+	render_scene(vars);
+	render_sprites(vars);
+	render_minimap(vars);
 	mlx_clear_window(vars->mlx.mlx, vars->mlx.win);
 	mlx_put_image_to_window(vars->mlx.mlx, vars->mlx.win,
 		vars->mlx.img.img, 0, 0);
