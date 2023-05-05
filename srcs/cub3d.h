@@ -6,7 +6,7 @@
 /*   By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 11:43:14 by hel-makh          #+#    #+#             */
-/*   Updated: 2023/05/05 19:37:26 by sciftci          ###   ########.fr       */
+/*   Updated: 2023/05/05 19:42:22 by sciftci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,7 +218,6 @@ int			ft_is_in_circle(double x, double y, t_circle circle);
 double		ft_rtod(double radian);
 double		ft_dtor(double degree);
 double		ft_radian_operations(double radian, double amout);
-void		ft_play_sound(char *path);
 
 //int			ft_collectible_frame(t_obj *lst, int x, int y);
 

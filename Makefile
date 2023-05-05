@@ -6,7 +6,7 @@
 #    By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/05 11:42:59 by hel-makh          #+#    #+#              #
-#    Updated: 2023/05/05 19:36:38 by sciftci          ###   ########.fr        #
+#    Updated: 2023/05/05 19:42:31 by sciftci          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,6 @@ FILES	=			utils/ft_get_current_time.c\
 					utils/ft_is_in_circle.c\
 					utils/ft_radian_degree.c\
 					utils/ft_radian_operations.c\
-					utils/ft_play_sound.c\
 					utils/list_fns.c\
 					parsing/ft_import_map.c\
 					parsing/ft_parse_textures.c\
