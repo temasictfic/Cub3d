@@ -6,13 +6,13 @@
 /*   By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/13 14:13:42 by hel-makh          #+#    #+#             */
-/*   Updated: 2023/05/05 02:00:38 by sciftci          ###   ########.fr       */
+/*   Updated: 2023/05/05 19:35:41 by sciftci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-static void	ft_collectibles_animation(t_vars *vars, t_obj *collectible)//t_col *collectible)
+static void	ft_collectibles_animation(t_vars *vars, t_obj *collectible)
 {
 	double	new_frame;
 
@@ -23,7 +23,7 @@ static void	ft_collectibles_animation(t_vars *vars, t_obj *collectible)//t_col *
 		collectible->frame = 0;
 }
 
-static int	ft_is_visible(t_vars *vars, t_obj *holder, int x)//t_col *holder, int x)
+static int	ft_is_visible(t_vars *vars, t_obj *holder, int x)
 {
 	t_coor	spr;
 
@@ -66,7 +66,6 @@ static void
 void	ft_render_sprites(t_vars *vars)
 {
 	t_rend_spr	rend;
-	//t_col		*holder;
 	t_list		*holder;
 	t_obj		*obj;
 	double		angle;

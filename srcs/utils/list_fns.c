@@ -62,7 +62,7 @@ void	list_clear(t_list **lst)
 	{
 		head = *lst;
 		*lst = (*lst)->next;
-		//free(head->strct);
+		free(head->strct);
 		head = ft_free(head); // strct kısmını freelemeyi unutma!
 	}
 	*lst = NULL;
@@ -80,7 +80,7 @@ void	list_remove(t_list **lst, int x, int y)
 	if (holder && obj->x == x && obj->y == y)
 	{
 		*lst = (*lst)->next;
-		//free(obj);
+		free(obj);
 		holder = ft_free(holder);  // strct kısmını freelemeyi unutma!
 		return;
 	}
@@ -90,7 +90,7 @@ void	list_remove(t_list **lst, int x, int y)
 		if (obj->x == x && obj->y == y)
 		{
 			prev->next = holder->next;
-			//free(obj);
+			free(obj);
 			holder = ft_free(holder);  // strct kısmını freelemeyi unutma!
 			return;
 		}

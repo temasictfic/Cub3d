@@ -6,7 +6,7 @@
 #    By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/05 11:42:59 by hel-makh          #+#    #+#              #
-#    Updated: 2023/05/05 04:56:03 by sciftci          ###   ########.fr        #
+#    Updated: 2023/05/05 19:36:38 by sciftci          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,9 +15,6 @@ CFLAGS = -Wall -Wextra -Werror -g -ggdb#-O3 -Ofast -flto -march=native#-g -ggdb 
 RM = rm -f
 #-O3 -Ofast -flto -march=native
 NAME = cub3d
-#utils/ft_collectible_lstfuncs.c\
-#utils/ft_door_lstfuncs.c\
-#utils/ft_render_lstfuncs.c
 FILES	=			utils/ft_get_current_time.c\
 					utils/ft_create_trgb.c\
 					utils/ft_get_distance.c\
@@ -25,7 +22,7 @@ FILES	=			utils/ft_get_current_time.c\
 					utils/ft_radian_degree.c\
 					utils/ft_radian_operations.c\
 					utils/ft_play_sound.c\
-					utils/deneme.c\
+					utils/list_fns.c\
 					parsing/ft_import_map.c\
 					parsing/ft_parse_textures.c\
 					parsing/ft_get_textures.c\
