@@ -6,13 +6,13 @@
 /*   By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/13 14:13:42 by hel-makh          #+#    #+#             */
-/*   Updated: 2023/04/15 16:53:57 by sciftci          ###   ########.fr       */
+/*   Updated: 2023/05/05 02:00:38 by sciftci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-static void	ft_collectibles_animation(t_vars *vars, t_col *collectible)
+static void	ft_collectibles_animation(t_vars *vars, t_obj *collectible)//t_col *collectible)
 {
 	double	new_frame;
 
@@ -23,7 +23,7 @@ static void	ft_collectibles_animation(t_vars *vars, t_col *collectible)
 		collectible->frame = 0;
 }
 
-static int	ft_is_visible(t_vars *vars, t_col *holder, int x)
+static int	ft_is_visible(t_vars *vars, t_obj *holder, int x)//t_col *holder, int x)
 {
 	t_coor	spr;
 
@@ -35,7 +35,7 @@ static int	ft_is_visible(t_vars *vars, t_col *holder, int x)
 }
 
 static void
-	ft_draw_sprite(t_vars *vars, t_rend_spr *rend, t_img *img, t_col *holder)
+	ft_draw_sprite(t_vars *vars, t_rend_spr *rend, t_img *img, t_obj *holder)//t_col *holder)
 {
 	int	i;
 	int	j;
@@ -66,15 +66,18 @@ static void
 void	ft_render_sprites(t_vars *vars)
 {
 	t_rend_spr	rend;
-	t_col		*holder;
+	//t_col		*holder;
+	t_list		*holder;
+	t_obj		*obj;
 	double		angle;
 
 	holder = vars->map.collectibles;
 	while (holder)
 	{
-		ft_collectibles_animation(vars, holder);
-		rend.col.x = (double)holder->x + 0.5;
-		rend.col.y = (double)holder->y + 0.5;
+		obj = holder->strct;
+		ft_collectibles_animation(vars, obj);
+		rend.col.x = (double)obj->x + 0.5;
+		rend.col.y = (double)obj->y + 0.5;
 		rend.sc.x = vars->player.pos.x - rend.col.x;
 		rend.sc.y = vars->player.pos.y - rend.col.y;
 		angle = ft_radian_operations(vars->player.angle,
@@ -87,7 +90,7 @@ void	ft_render_sprites(t_vars *vars)
 			- (rend.spr.width / 2);
 		rend.sc.y = (HEIGHT / 2);
 		ft_draw_sprite(vars, &rend,
-			&vars->map.collectible.img[(int)holder->frame], holder);
+			&vars->map.collectible.img[(int)obj->frame], obj);
 		holder = holder->next;
 	}
 }

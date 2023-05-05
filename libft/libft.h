@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 18:28:42 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/08/16 15:26:20 by hel-makh         ###   ########.fr       */
+/*   Updated: 2023/05/05 01:58:02 by sciftci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@
 
 # define BUFFER_SIZE 42
 
-typedef struct s_list
+typedef struct s_listol
 {
 	int				fd;
 	char			content[BUFFER_SIZE + 1];
 	struct s_list	*next;
-}	t_list;
+}	t_listol;
 
 typedef struct s_index {
 	size_t	i;
