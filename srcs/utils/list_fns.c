@@ -1,12 +1,6 @@
 #include "../cub3d.h"
 
-// struct s_list
-// {
-//     void *strct;
-//     struct s_list *next;
-// }typedef t_list;
-
-t_obj	*ft_obj_new(int x, int y, int frame)
+t_obj	*obj_new(int x, int y, int frame)
 {
 	t_obj	*element;
 
@@ -16,18 +10,6 @@ t_obj	*ft_obj_new(int x, int y, int frame)
 	element->x = x;
 	element->y = y;
 	element->frame = frame;
-	//element->next = NULL; bunlar direk struct olarak init olacak
-	return (element);
-}
-
-t_render	*ft_render_new(void)
-{
-	t_render	*element;
-
-	element = malloc (1 * sizeof(t_render));
-	if (element == NULL)
-		return (NULL);
-	//element->next = NULL; bunlar direk struct olarak init olacak
 	return (element);
 }
 

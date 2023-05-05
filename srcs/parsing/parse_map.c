@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_parse_map.c                                     :+:      :+:    :+:   */
+/*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 13:48:05 by hel-makh          #+#    #+#             */
-/*   Updated: 2023/04/15 16:54:32 by sciftci          ###   ########.fr       */
+/*   Updated: 2023/05/05 23:48:04 by sciftci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-static int	ft_read_map(t_map *map, int fd)
+static int	read_map(t_map *map, int fd)
 {
 	char	*line;
 	int		empty_line;
@@ -41,7 +41,7 @@ static int	ft_read_map(t_map *map, int fd)
 	return (1);
 }
 
-static int	ft_check_component(t_map *map, int i, int j, t_content *content)
+static int	check_component(t_map *map, int i, int j, t_content *content)
 {
 	if (!ft_strchr(" 0123NSEWC", map->map[i][j]))
 	{
@@ -57,7 +57,7 @@ static int	ft_check_component(t_map *map, int i, int j, t_content *content)
 	return (1);
 }
 
-static int	ft_check_map_content(t_map *map)
+static int	check_map_content(t_map *map)
 {
 	t_content	content;
 	int			i;
@@ -70,7 +70,7 @@ static int	ft_check_map_content(t_map *map)
 	{
 		j = -1;
 		while (map->map[i][++j])
-			if (!ft_check_component(map, i, j, &content))
+			if (!check_component(map, i, j, &content))
 				return (0);
 		i ++;
 	}
@@ -83,7 +83,7 @@ static int	ft_check_map_content(t_map *map)
 	return (1);
 }
 
-static int	ft_is_map_closed(t_map *map)
+static int	is_map_closed(t_map *map)
 {
 	int	i;
 	int	j;
@@ -96,7 +96,7 @@ static int	ft_is_map_closed(t_map *map)
 		{
 			if (ft_strchr(" 023NSEWC", map->map[i][j]))
 			{
-				if (!ft_component_surroundings(map->map, i, j))
+				if (!component_surroundings(map->map, i, j))
 					return (0);
 			}
 			j ++;
@@ -106,15 +106,15 @@ static int	ft_is_map_closed(t_map *map)
 	return (1);
 }
 
-int	ft_parse_map(t_map *map, int fd)
+int	parse_map(t_map *map, int fd)
 {
-	if (!ft_read_map(map, fd))
+	if (!read_map(map, fd))
 		return (0);
 	if (!ft_arrlen(map->map))
 		return (printf("Error\nInvalid map.\n"), 0);
-	if (!ft_check_map_content(map))
+	if (!check_map_content(map))
 		return (0);
-	if (!ft_is_map_closed(map))
+	if (!is_map_closed(map))
 		return (0);
 	return (1);
 }

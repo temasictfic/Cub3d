@@ -6,7 +6,7 @@
 /*   By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 11:43:14 by hel-makh          #+#    #+#             */
-/*   Updated: 2023/05/05 23:26:48 by sciftci          ###   ########.fr       */
+/*   Updated: 2023/05/06 00:20:29 by sciftci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include "../mlx_macos/mlx.h"
 
 # define USAGE			"Usage: ./cub3d <file.cub>"
+# define DEG_INC	0.06
 
 /************************[ Components ]***********************/
 # define SPACE			' '
@@ -209,42 +210,38 @@ double		deg_to_rad(double degree);
 double		radian_operations(double radian, double amout);
 
 
-int			ft_door_frame(t_list *lst, int x, int y);
+int			door_frame(t_list *lst, int x, int y);
 
 /*************************[ Parsing ]*************************/
-int			ft_import_map(t_vars *vars, char *file);
-int			ft_parse_textures(t_vars *vars, int fd);
-int			ft_get_textures(t_vars *vars, char **info);
-int			ft_parse_map(t_map *map, int fd);
-int			ft_component_surroundings(char **map, int i, int j);
+int			import_map(t_vars *vars, char *file);
+int			parse_textures(t_vars *vars, int fd);
+int			get_textures(t_vars *vars, char **info);
+int			parse_map(t_map *map, int fd);
+int			component_surroundings(char **map, int i, int j);
 
 /************************[ Movements ]************************/
-void		ft_get_player_position(t_vars *vars);
+void		get_player_position(t_vars *vars);
 int			key_press(int keycode, t_vars *vars);
 int			key_release(int keycode, t_vars *vars);
 int			mouse_rotation(int x, int y, t_vars *vars);
-void		ft_move_player(t_vars *vars);
+void		move_player(t_vars *vars);
 
 /************************[ Rendering ]************************/
-int			ft_init_images(t_vars *vars);
-t_coor		ft_get_hit_wall(t_vars *vars, t_coor start_pos,
+int			init_images(t_vars *vars);
+t_coor		get_hit_wall(t_vars *vars, t_coor start_pos,
 				double angle, int *direction);
 int			frame_rendering(t_vars *vars);
-void		ft_render_minimap(t_vars *vars);
-void		ft_draw_rays(t_vars *vars, t_circle minimap);
-void		ft_render_3d_scene(t_vars *vars);
-void		ft_render_sprites(t_vars *vars);
-void		ft_draw_floor_ceilling(t_vars *vars);
-void		ft_door_animation(t_vars *vars);
-void		ft_open_close_door(t_vars *vars);
+void		render_minimap(t_vars *vars);
+void		draw_rays(t_vars *vars, t_circle minimap);
+void		render_scene(t_vars *vars);
+void		render_sprites(t_vars *vars);
+void		draw_floor_ceilling(t_vars *vars);
+void		door_animation(t_vars *vars);
+void		open_close_door(t_vars *vars);
 
-/**************************[ Other ]**************************/
-int			ft_exit_game(t_vars *vars, int exit_status);
-
-
-t_obj	*ft_obj_new(int x, int y, int frame);
-t_render	*ft_render_new(void);
-
+/**************************[ Utils ]**************************/
+int			exit_game(t_vars *vars, int exit_status);
+t_obj	*obj_new(int x, int y, int frame);
 t_list	*list_new(void *strct);
 void	list_add_front(t_list **lst, t_list *new);
 void	list_clear(t_list **lst);

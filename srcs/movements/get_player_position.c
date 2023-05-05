@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_player_position.c                           :+:      :+:    :+:   */
+/*   get_player_position.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 10:41:39 by hel-makh          #+#    #+#             */
-/*   Updated: 2023/05/05 19:43:52 by sciftci          ###   ########.fr       */
+/*   Updated: 2023/05/06 00:18:02 by sciftci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-static void	ft_get_player_angle(t_vars *vars)
+static void	get_player_angle(t_vars *vars)
 {
 	int		x;
 	int		y;
@@ -29,7 +29,7 @@ static void	ft_get_player_angle(t_vars *vars)
 		vars->player.angle = 0;
 }
 
-void	ft_get_player_position(t_vars *vars)
+void	get_player_position(t_vars *vars)
 {
 	int	i;
 	int	j;
@@ -44,12 +44,12 @@ void	ft_get_player_position(t_vars *vars)
 			{
 				vars->player.pos.x = (double)j + 0.5;
 				vars->player.pos.y = (double)i + 0.5;
-				ft_get_player_angle(vars);
+				get_player_angle(vars);
 			}
 			else if (vars->map.map[i][j] == COLLECTIBLE)
-				list_add_front(&vars->map.collectibles, list_new(ft_obj_new(j, i, 1)));
+				list_add_front(&vars->map.collectibles, list_new(obj_new(j, i, 1)));
 			else if (vars->map.map[i][j] == O_DOOR)
-				list_add_front(&vars->map.doors, list_new(ft_obj_new(j, i, vars->map.door.frames - 1)));
+				list_add_front(&vars->map.doors, list_new(obj_new(j, i, vars->map.door.frames - 1)));
 			j ++;
 		}
 		i ++;

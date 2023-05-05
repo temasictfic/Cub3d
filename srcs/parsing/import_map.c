@@ -6,13 +6,13 @@
 /*   By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 14:03:39 by hel-makh          #+#    #+#             */
-/*   Updated: 2023/04/15 16:54:34 by sciftci          ###   ########.fr       */
+/*   Updated: 2023/05/05 23:48:50 by sciftci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-static void	ft_init_map_vars(t_map *map)
+static void	init_map_vars(t_map *map)
 {
 	map->map = NULL;
 	map->ce_color = -1;
@@ -29,21 +29,21 @@ static void	ft_init_map_vars(t_map *map)
 	map->doors = NULL;
 }
 
-int	ft_import_map(t_vars *vars, char *file)
+int	import_map(t_vars *vars, char *file)
 {
 	char	*extension;
 	int		fd;
 
-	ft_init_map_vars(&vars->map);
+	init_map_vars(&vars->map);
 	extension = ft_strrstr(file, ".cub");
 	if (!extension || (extension && ft_strcmp(extension, ".cub")))
 		return (printf("Error\nInvalid file extension.\n%s\n", USAGE), 0);
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		return (printf("Error\nCouldn't open <%s> file.\n", file), 0);
-	if (!ft_parse_textures(vars, fd) || !ft_parse_map(&vars->map, fd))
+	if (!parse_textures(vars, fd) || !parse_map(&vars->map, fd))
 		return (0);
 	close(fd);
-	ft_get_player_position(vars);
+	get_player_position(vars);
 	return (1);
 }

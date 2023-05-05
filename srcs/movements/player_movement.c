@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_player_movement.c                               :+:      :+:    :+:   */
+/*   player_movement.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 22:27:23 by hel-makh          #+#    #+#             */
-/*   Updated: 2023/05/05 23:12:25 by sciftci          ###   ########.fr       */
+/*   Updated: 2023/05/06 00:14:15 by sciftci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	mouse_rotation(int x, int y, t_vars *vars)
 	return (0);
 }
 
-static void	ft_get_player_direction(t_vars *vars)
+static void	get_player_direction(t_vars *vars)
 {
 	double	direction_angle;
 
@@ -44,11 +44,11 @@ static void	ft_get_player_direction(t_vars *vars)
 	vars->player.dir.y = sin(direction_angle);
 }
 
-void	ft_move_player(t_vars *vars)
+void	move_player(t_vars *vars)
 {
 	t_coor	new_pos;
 
-	ft_get_player_direction(vars);
+	get_player_direction(vars);
 	if (!(int)vars->player.move.x && !(int)vars->player.move.y)
 		return ;
 	new_pos.x = vars->player.pos.x
@@ -85,9 +85,9 @@ int	key_press(int keycode, t_vars *vars)
 	else if (keycode == KEY_E)
 		vars->player.rotate = 1;
 	else if (keycode == KEY_F)
-		ft_open_close_door(vars);
+		open_close_door(vars);
 	else if (keycode == KEY_ESC)
-		ft_exit_game(vars, EXIT_SUCCESS);
+		exit_game(vars, EXIT_SUCCESS);
 	return (0);
 }
 

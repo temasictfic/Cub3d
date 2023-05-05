@@ -6,13 +6,13 @@
 /*   By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 19:53:41 by hel-makh          #+#    #+#             */
-/*   Updated: 2023/05/05 22:59:45 by sciftci          ###   ########.fr       */
+/*   Updated: 2023/05/06 00:08:08 by sciftci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-static void	ft_draw_circle(int *data, t_circle circle, int color)
+static void	draw_circle(int *data, t_circle circle, int color)
 {
 	int	edge;
 	int	x;
@@ -33,7 +33,7 @@ static void	ft_draw_circle(int *data, t_circle circle, int color)
 	}
 }
 
-static void	ft_draw_square(int *data, t_coor coor, t_circle minimap, int color)
+static void	draw_square(int *data, t_coor coor, t_circle minimap, int color)
 {
 	int	x;
 	int	y;
@@ -52,7 +52,7 @@ static void	ft_draw_square(int *data, t_coor coor, t_circle minimap, int color)
 	}
 }
 
-static void	ft_draw_map_components(t_vars *vars, t_circle minimap)
+static void	draw_map_components(t_vars *vars, t_circle minimap)
 {
 	t_coor	coor;
 	int		i;
@@ -69,10 +69,10 @@ static void	ft_draw_map_components(t_vars *vars, t_circle minimap)
 			coor.x = (j * C_SIDE_LEN)
 				- (vars->player.pos.x * C_SIDE_LEN) + CENTER;
 			if (vars->map.map[i][j] == C_DOOR)
-				ft_draw_square(vars->mlx.img.data, coor, minimap,
+				draw_square(vars->mlx.img.data, coor, minimap,
 					create_trgb(0, 118, 84, 16));
 			else if (!ft_strchr("03NSEWC", vars->map.map[i][j]))
-				ft_draw_square(vars->mlx.img.data, coor, minimap,
+				draw_square(vars->mlx.img.data, coor, minimap,
 					create_trgb(0, 60, 60, 60));
 			j ++;
 		}
@@ -80,7 +80,7 @@ static void	ft_draw_map_components(t_vars *vars, t_circle minimap)
 	}
 }
 
-void	ft_render_minimap(t_vars *vars)
+void	render_minimap(t_vars *vars)
 {
 	t_circle	minimap;
 	t_circle	player;
@@ -88,13 +88,13 @@ void	ft_render_minimap(t_vars *vars)
 	minimap.x = CENTER;
 	minimap.y = CENTER;
 	minimap.radius = RADIUS - 1;
-	ft_draw_circle(vars->mlx.img.data, minimap,
+	draw_circle(vars->mlx.img.data, minimap,
 		create_trgb(0, 255, 255, 255));
-	ft_draw_map_components(vars, minimap);
-	ft_draw_rays(vars, minimap);
+	draw_map_components(vars, minimap);
+	draw_rays(vars, minimap);
 	player.x = CENTER;
 	player.y = CENTER;
 	player.radius = PL_RADIUS;
-	ft_draw_circle(vars->mlx.img.data, player,
+	draw_circle(vars->mlx.img.data, player,
 		create_trgb(0, 255, 0, 0));
 }

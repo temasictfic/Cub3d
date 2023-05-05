@@ -6,7 +6,7 @@
 #    By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/05 11:42:59 by hel-makh          #+#    #+#              #
-#    Updated: 2023/05/05 23:26:21 by sciftci          ###   ########.fr        #
+#    Updated: 2023/05/06 00:09:28 by sciftci          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,21 +17,21 @@ RM = rm -f
 NAME = cub3d
 FILES	=			utils/utils.c\
 					utils/list_fns.c\
-					parsing/ft_import_map.c\
-					parsing/ft_parse_textures.c\
-					parsing/ft_get_textures.c\
-					parsing/ft_parse_map.c\
-					parsing/ft_component_surroundings.c\
-					movements/ft_get_player_position.c\
-					movements/ft_player_movement.c\
-					rendering/ft_get_hit_wall.c\
-					rendering/ft_frame_rendering.c\
-					rendering/ft_door_opening.c\
-					rendering/ft_render_minimap.c\
-					rendering/ft_draw.c\
-					rendering/ft_render_3d_scene.c\
-					rendering/ft_render_sprites.c\
-					other/ft_exit_game.c\
+					utils/exit_game.c\
+					parsing/import_map.c\
+					parsing/parse_textures.c\
+					parsing/get_textures.c\
+					parsing/parse_map.c\
+					parsing/component_surroundings.c\
+					movements/get_player_position.c\
+					movements/player_movement.c\
+					rendering/get_hit_wall.c\
+					rendering/frame_rendering.c\
+					rendering/door_opening.c\
+					rendering/render_minimap.c\
+					rendering/draw.c\
+					rendering/render_scene.c\
+					rendering/render_sprites.c\
 					main.c
 
 SRCS_DIR		=	srcs/

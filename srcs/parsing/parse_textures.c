@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_parse_textures.c                                :+:      :+:    :+:   */
+/*   parse_textures.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 19:04:43 by hel-makh          #+#    #+#             */
-/*   Updated: 2023/04/15 16:54:30 by sciftci          ###   ########.fr       */
+/*   Updated: 2023/05/05 23:45:11 by sciftci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-static int	ft_is_parsed(t_map *map)
+static int	is_parsed(t_map *map)
 {
 	if (map->north.img && map->south.img && map->west.img && map->east.img
 		&& map->collectible.img && map->door.img
@@ -21,7 +21,7 @@ static int	ft_is_parsed(t_map *map)
 	return (0);
 }
 
-static int	ft_is_duplicated(t_map *map, char **info)
+static int	is_duplicated(t_map *map, char **info)
 {
 	if ((!ft_strcmp(info[0], "NO") && map->north.img)
 		|| (!ft_strcmp(info[0], "SO") && map->south.img)
@@ -35,7 +35,7 @@ static int	ft_is_duplicated(t_map *map, char **info)
 	return (0);
 }
 
-static int	ft_is_valid_format(char **info)
+static int	is_valid_format(char **info)
 {
 	if ((!ft_strcmp(info[0], "NO") && ft_arrlen(info) != 2)
 		|| (!ft_strcmp(info[0], "SO") && ft_arrlen(info) != 2)
@@ -49,12 +49,12 @@ static int	ft_is_valid_format(char **info)
 	return (1);
 }
 
-int	ft_parse_textures(t_vars *vars, int fd)
+int	parse_textures(t_vars *vars, int fd)
 {
 	char	*line;
 	char	**info;
 
-	while (!ft_is_parsed(&vars->map))
+	while (!is_parsed(&vars->map))
 	{
 		line = get_next_line(fd);
 		if (!line)
@@ -62,9 +62,9 @@ int	ft_parse_textures(t_vars *vars, int fd)
 		if (*line)
 		{
 			info = ft_split(line, ' ');
-			if (!ft_is_valid_format(info)
-				|| ft_is_duplicated(&vars->map, info)
-				|| !ft_get_textures(vars, info))
+			if (!is_valid_format(info)
+				|| is_duplicated(&vars->map, info)
+				|| !get_textures(vars, info))
 				return (ft_free_2d(info), 0);
 			info = ft_free_2d(info);
 		}
