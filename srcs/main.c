@@ -6,7 +6,7 @@
 /*   By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 11:49:49 by hel-makh          #+#    #+#             */
-/*   Updated: 2023/05/06 00:21:57 by sciftci          ###   ########.fr       */
+/*   Updated: 2023/05/06 00:24:49 by sciftci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ static void	start_game(t_vars *vars)
 	vars->player.move.y = 0;
 	vars->player.rotate = 0;
 	mlx_mouse_hide();
-	mlx_hook(vars->mlx.win, 02, (1L << 0), key_press, vars);
-	mlx_hook(vars->mlx.win, 03, (1L << 1), key_release, vars);
-	mlx_hook(vars->mlx.win, 06, (1L << 6), mouse_rotation, vars);
-	mlx_hook(vars->mlx.win, 17, 0L, exit_game, vars);
+	mlx_hook(vars->mlx.win, EVENT_ON_KEYDOWN, NO_MASK, key_press, vars);
+	mlx_hook(vars->mlx.win, EVENT_ON_KEYUP, NO_MASK, key_release, vars);
+	mlx_hook(vars->mlx.win, EVENT_ON_MOUSEMOVE, NO_MASK, mouse_rotation, vars);
+	mlx_hook(vars->mlx.win, EVENT_ON_DESTROY, NO_MASK, exit_game, vars);
 	mlx_loop_hook(vars->mlx.mlx, frame_rendering, vars);
 	mlx_loop(vars->mlx.mlx);
 }
