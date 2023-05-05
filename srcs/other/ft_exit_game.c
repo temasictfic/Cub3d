@@ -6,7 +6,7 @@
 /*   By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 17:24:09 by hel-makh          #+#    #+#             */
-/*   Updated: 2023/05/04 23:22:12 by sciftci          ###   ########.fr       */
+/*   Updated: 2023/05/05 23:13:28 by sciftci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,8 @@ int	ft_exit_game(t_vars *vars, int exit_status)
 	ft_destroy_image(vars, &vars->map.east);
 	ft_destroy_sprite(vars, &vars->map.collectible);
 	list_clear(&vars->map.collectibles);
-	//ft_collectible_lstclear(&vars->map.collectibles);
 	ft_destroy_sprite(vars, &vars->map.door);
 	list_clear(&vars->map.doors);
-	//ft_door_lstclear(&vars->map.doors);
 	vars->map.map = ft_free_2d(vars->map.map);
 	exit(exit_status);
 }

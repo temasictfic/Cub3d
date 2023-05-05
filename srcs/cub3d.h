@@ -6,7 +6,7 @@
 /*   By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 11:43:14 by hel-makh          #+#    #+#             */
-/*   Updated: 2023/05/05 19:42:22 by sciftci          ###   ########.fr       */
+/*   Updated: 2023/05/05 23:26:48 by sciftci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,12 @@
 
 # define USAGE			"Usage: ./cub3d <file.cub>"
 
-/**********************[ Sound Effects ]**********************/
-# define DOOR_OPEN		"bonus/sound/door_open.wav"
-# define DOOR_CLOSE		"bonus/sound/door_close.wav"
-# define COIN_COLLECT	"bonus/sound/coin_collect.wav"
-
 /************************[ Components ]***********************/
 # define SPACE			' '
 # define EMPTY_SPACE	'0'
 # define WALL			'1'
-# define C_DOOR			'2'
-# define O_DOOR			'3'
+# define C_DOOR			'2' //Closed door
+# define O_DOOR			'3' //Open door
 # define P_NORTH		'N'
 # define P_SOUTH		'S'
 # define P_EAST			'E'
@@ -45,23 +40,14 @@
 # define WALLS			"12"
 # define DOORS			"23"
 
+/**********************[ Events ]**********************/
+# define EVENT_ON_KEYDOWN 2
+# define EVENT_ON_KEYUP 3
+# define EVENT_ON_MOUSEMOVE 6
+# define EVENT_ON_DESTROY 17
+# define NO_MASK 0
+
 /**********************[ Configuration ]**********************/
-# if defined(__linux__)
-
-enum e_keycodes {
-	KEY_ESC = 65307,
-	KEY_A = 97,
-	KEY_W = 119,
-	KEY_D = 100,
-	KEY_S = 115,
-	KEY_E = 101,
-	KEY_LEFT = 65361,
-	KEY_UP = 65362,
-	KEY_RIGHT = 65363,
-	KEY_DOWN = 65364
-};
-
-# elif defined(__APPLE__) && defined(__MACH__)
 
 enum e_keycodes {
 	KEY_ESC = 53,
@@ -72,13 +58,7 @@ enum e_keycodes {
 	KEY_E = 14,
 	KEY_F = 3,
 	KEY_Q = 12,
-	KEY_LEFT = 123,
-	KEY_UP = 126,
-	KEY_RIGHT = 124,
-	KEY_DOWN = 125
 };
-
-# endif
 
 enum e_window {
 	WIDTH = 850,
@@ -104,50 +84,58 @@ enum e_player {
 };
 
 /************************[ Structers ]************************/
+//24
 typedef struct s_circle {
 	double	x;
 	double	y;
 	double	radius;
 }	t_circle;
 
+//16
 typedef struct s_dim {
 	double	width;
 	double	height;
 }	t_dim;
 
+//16
 typedef struct s_coor {
 	double	x;
 	double	y;
 }	t_coor;
 
+//16
 typedef struct s_obj {
 	int				x;
 	int				y;
 	double			frame;
 }	t_obj;
 
+//8
 typedef struct s_content {
 	int	wall;
 	int	player;
 }	t_content;
 
+//80
 typedef struct s_render {
 	double			degree;
 	double			angle;
 	t_coor			hit_wall;
-	int				direc;
-	double			dist;
 	t_dim			wall_dim;
+	double			dist;
 	double			wall_orig_height;
+	int				direc;
 	int				ty;
 }	t_render;
 
-struct s_list
+//16
+typedef struct s_list
 {
     void *strct;
     struct s_list *next;
-}typedef t_list;
+} t_list;
 
+//64
 typedef struct s_rend_spr {
 	t_coor	sc;
 	t_coor	col;
@@ -155,14 +143,16 @@ typedef struct s_rend_spr {
 	t_dim	spr;
 }	t_rend_spr;
 
+//64
 typedef struct s_player {
 	t_coor	pos;
-	double	angle;
 	t_coor	dir;
 	t_coor move;
+	double	angle;
 	double	rotate;
 }	t_player;
 
+//40
 typedef struct s_img {
 	void	*img;
 	int		*data;
@@ -173,53 +163,51 @@ typedef struct s_img {
 	int		height;
 }	t_img;
 
+//16
 typedef struct s_spr {
 	t_img	*img;
 	int		frames;
 }	t_spr;
 
+//240 + depth
 typedef struct s_map {
-	char	**map;
-	int		ce_color;
-	int		fl_color;
 	t_img	north;
 	t_img	south;
 	t_img	west;
 	t_img	east;
-	t_spr	collectible;
-	//t_col	*collectibles;
-	t_list   *collectibles;
-	t_spr	door;
-	//t_door	*doors;
-	t_list	*doors;
 	t_coor	spr;
+	t_spr	collectible;
+	t_spr	door;
+	t_list   *collectibles;
+	t_list	*doors;
+	char	**map;
+	int		ce_color;
+	int		fl_color;
 	double	depth[WIDTH];
 }	t_map;
 
+//72
 typedef struct s_mlx {
+	t_img	img;
 	void	*mlx;
 	void	*win;
-	t_img	img;
-	int		fps;
 	double	fspeed;
+	int		fps;
 }	t_mlx;
 
 typedef struct s_vars {
-	t_mlx		mlx;
 	t_map		map;
+	t_mlx		mlx;
 	t_player	player;
 }	t_vars;
 
 /**************************[ Utils ]**************************/
-long		ft_get_current_time(void);
-int			ft_create_trgb(int t, int r, int g, int b);
-double		ft_get_distance(t_coor poin1, t_coor point2);
-int			ft_is_in_circle(double x, double y, t_circle circle);
-double		ft_rtod(double radian);
-double		ft_dtor(double degree);
-double		ft_radian_operations(double radian, double amout);
+int			create_trgb(int t, int r, int g, int b);
+double		get_distance(t_coor poin1, t_coor point2);
+int			is_in_circle(double x, double y, t_circle circle);
+double		deg_to_rad(double degree);
+double		radian_operations(double radian, double amout);
 
-//int			ft_collectible_frame(t_obj *lst, int x, int y);
 
 int			ft_door_frame(t_list *lst, int x, int y);
 

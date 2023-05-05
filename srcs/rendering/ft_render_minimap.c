@@ -6,7 +6,7 @@
 /*   By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 19:53:41 by hel-makh          #+#    #+#             */
-/*   Updated: 2023/04/15 16:54:01 by sciftci          ###   ########.fr       */
+/*   Updated: 2023/05/05 22:59:45 by sciftci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	ft_draw_circle(int *data, t_circle circle, int color)
 		x = edge;
 		while (x <= edge + (circle.radius * 2))
 		{
-			if (ft_is_in_circle(x, y, circle))
+			if (is_in_circle(x, y, circle))
 				data[y * WIDTH + x] = color;
 			x ++;
 		}
@@ -44,7 +44,7 @@ static void	ft_draw_square(int *data, t_coor coor, t_circle minimap, int color)
 		x = coor.x + 1;
 		while (x < coor.x + C_SIDE_LEN - 1)
 		{
-			if (ft_is_in_circle(x, y, minimap) == 1)
+			if (is_in_circle(x, y, minimap) == 1)
 				data[y * WIDTH + x] = color;
 			x ++;
 		}
@@ -70,10 +70,10 @@ static void	ft_draw_map_components(t_vars *vars, t_circle minimap)
 				- (vars->player.pos.x * C_SIDE_LEN) + CENTER;
 			if (vars->map.map[i][j] == C_DOOR)
 				ft_draw_square(vars->mlx.img.data, coor, minimap,
-					ft_create_trgb(0, 118, 84, 16));
+					create_trgb(0, 118, 84, 16));
 			else if (!ft_strchr("03NSEWC", vars->map.map[i][j]))
 				ft_draw_square(vars->mlx.img.data, coor, minimap,
-					ft_create_trgb(0, 60, 60, 60));
+					create_trgb(0, 60, 60, 60));
 			j ++;
 		}
 		i ++;
@@ -89,12 +89,12 @@ void	ft_render_minimap(t_vars *vars)
 	minimap.y = CENTER;
 	minimap.radius = RADIUS - 1;
 	ft_draw_circle(vars->mlx.img.data, minimap,
-		ft_create_trgb(0, 255, 255, 255));
+		create_trgb(0, 255, 255, 255));
 	ft_draw_map_components(vars, minimap);
 	ft_draw_rays(vars, minimap);
 	player.x = CENTER;
 	player.y = CENTER;
 	player.radius = PL_RADIUS;
 	ft_draw_circle(vars->mlx.img.data, player,
-		ft_create_trgb(0, 255, 0, 0));
+		create_trgb(0, 255, 0, 0));
 }
