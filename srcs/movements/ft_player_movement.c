@@ -6,7 +6,7 @@
 /*   By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 22:27:23 by hel-makh          #+#    #+#             */
-/*   Updated: 2023/05/04 22:49:25 by sciftci          ###   ########.fr       */
+/*   Updated: 2023/05/05 19:41:14 by sciftci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,7 @@ void	ft_move_player(t_vars *vars)
 	{
 		vars->map.map[(int)vars->player.pos.y][(int)vars->player.pos.x]
 			= EMPTY_SPACE;
-		ft_play_sound(COIN_COLLECT);
 		list_remove(&vars->map.collectibles, vars->player.pos.x, vars->player.pos.y);
-		// ft_collectible_lstdel(&vars->map.collectibles,
-		// 	vars->player.pos.x, vars->player.pos.y);
 	}
 }
 
