@@ -6,7 +6,7 @@
 /*   By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 10:41:39 by hel-makh          #+#    #+#             */
-/*   Updated: 2023/04/15 16:54:50 by sciftci          ###   ########.fr       */
+/*   Updated: 2023/05/05 01:20:08 by sciftci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,16 @@ void	ft_get_player_position(t_vars *vars)
 				vars->player.pos.y = (double)i + 0.5;
 				ft_get_player_angle(vars);
 			}
+			// else if (vars->map.map[i][j] == COLLECTIBLE)
+			// 	ft_collectible_lstadd_front(&vars->map.collectibles,
+			// 		ft_collectible_lstnew(j, i));
 			else if (vars->map.map[i][j] == COLLECTIBLE)
-				ft_collectible_lstadd_front(&vars->map.collectibles,
-					ft_collectible_lstnew(j, i));
+				list_add_front(&vars->map.collectibles, list_new(ft_obj_new(j, i, 1)));
+			// else if (vars->map.map[i][j] == O_DOOR)
+			// 	ft_door_lstadd_front(&vars->map.doors,
+			// 		ft_door_lstnew(j, i, vars->map.door.frames - 1));
 			else if (vars->map.map[i][j] == O_DOOR)
-				ft_door_lstadd_front(&vars->map.doors,
-					ft_door_lstnew(j, i, vars->map.door.frames - 1));
+				list_add_front(&vars->map.doors, list_new(ft_obj_new(j, i, vars->map.door.frames - 1)));
 			j ++;
 		}
 		i ++;

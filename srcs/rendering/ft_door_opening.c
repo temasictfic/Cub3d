@@ -6,18 +6,20 @@
 /*   By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:30:10 by hel-makh          #+#    #+#             */
-/*   Updated: 2023/04/15 16:54:25 by sciftci          ###   ########.fr       */
+/*   Updated: 2023/05/05 01:59:54 by sciftci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int	ft_door_frame(t_door *lst, int x, int y)
+int	ft_door_frame(t_list *lst, int x, int y)//t_door *lst, int x, int y)
 {
+	t_obj *obj;
 	while (lst)
 	{
-		if (lst->x == x && lst->y == y)
-			return ((int)lst->frame);
+		obj = lst->strct;
+		if (obj->x == x && obj->y == y)
+			return ((int)obj->frame);
 		lst = lst->next;
 	}
 	return (0);
@@ -25,23 +27,28 @@ int	ft_door_frame(t_door *lst, int x, int y)
 
 void	ft_door_animation(t_vars *vars)
 {
-	t_door	*holder;
-	t_door	*next_holder;
+	// t_door	*holder;
+	// t_door	*next_holder;
+	t_list *holder;
+	t_list *next_holder;
+	t_obj *obj;
 	double	new_frame;
 
 	holder = vars->map.doors;
 	while (holder)
 	{
-		if (vars->map.map[holder->y][holder->x] == O_DOOR)
-			new_frame = holder->frame + (vars->mlx.fspeed * 20);
+		obj = holder->strct;
+		if (vars->map.map[obj->y][obj->x] == O_DOOR)
+			new_frame = obj->frame + (vars->mlx.fspeed * 20);
 		else
-			new_frame = holder->frame - (vars->mlx.fspeed * 20);
+			new_frame = obj->frame - (vars->mlx.fspeed * 20);
 		if ((int)new_frame < vars->map.door.frames)
-			holder->frame = new_frame;
-		if (holder->frame <= 0)
+			obj->frame = new_frame;
+		if (obj->frame <= 0)
 		{
 			next_holder = holder->next;
-			ft_door_lstdel(&vars->map.doors, holder->x, holder->y);
+			//ft_door_lstdel(&vars->map.doors, holder->x, holder->y);
+			list_remove(&vars->map.doors, obj->x, obj->y);
 			holder = next_holder;
 			continue ;
 		}
@@ -64,8 +71,9 @@ void	ft_open_close_door(t_vars *vars)
 		&& ft_door_frame(vars->map.doors, door.x, door.y) == 0)
 	{
 		ft_play_sound(DOOR_OPEN);
-		ft_door_lstadd_front(&vars->map.doors,
-			ft_door_lstnew(door.x, door.y, 0));
+		// ft_door_lstadd_front(&vars->map.doors,
+		// 	ft_door_lstnew(door.x, door.y, 0));
+		list_add_front(&vars->map.doors, list_new(ft_obj_new(door.x, door.y, 0)));
 		vars->map.map[(int)door.y][(int)door.x] = O_DOOR;
 	}
 	else if (vars->map.map[(int)door.y][(int)door.x] == O_DOOR
