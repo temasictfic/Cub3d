@@ -6,7 +6,7 @@
 /*   By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 11:04:10 by hel-makh          #+#    #+#             */
-/*   Updated: 2023/05/05 06:12:29 by sciftci          ###   ########.fr       */
+/*   Updated: 2023/05/05 19:35:04 by sciftci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static void
 		vars->map.depth[x] = render->dist;
 }
 
-static void	ft_draw_walls(t_vars *vars, t_list *scene)//
+static void	ft_draw_walls(t_vars *vars, t_list *scene)
 {
 	int	x;
 	int	y;
@@ -86,7 +86,6 @@ static void	ft_draw_walls(t_vars *vars, t_list *scene)//
 			y ++;
 		}
 		scene = scene->next;
-		//render = render->next;
 	}
 }
 
@@ -109,35 +108,27 @@ static void	ft_get_wall_dims(t_vars *vars, t_render *render,
 
 void	ft_render_3d_scene(t_vars *vars)
 {
-	t_render	*render;
 	t_render	*temp;
 	t_list		*scene;
 	double		degree;
 
 	ft_draw_floor_ceilling(vars);
-	render = NULL;
 	scene = NULL;
 	degree = 0;
 	while (degree <= FOV)
 	{
-		// while (!render || (render && vars->map.map[(int)render->hit_wall.y]
-		// 		[(int)render->hit_wall.x] != WALL))
-		while (!render || (render && vars->map.map[(int)render->hit_wall.y][(int)render->hit_wall.x] != WALL))
+		while (!scene|| (scene && vars->map.map[(int)((t_render *)(scene->strct))->hit_wall.y][(int)((t_render *)(scene->strct))->hit_wall.x] != WALL))
 		{
 			temp = ft_render_new();
 			temp->angle = ft_radian_operations(vars->player.angle,
 					ft_dtor(degree - (FOV / 2)));
-			if (!render)
+			if (!scene)
 				ft_get_wall_dims(vars, temp, vars->player.pos, degree);		
 			else
-				ft_get_wall_dims(vars, temp, render->hit_wall, degree);								
-			//ft_render_lstadd_front(&render, temp);
+				ft_get_wall_dims(vars, temp, ((t_render *)(scene->strct))->hit_wall, degree);								
 			list_add_front(&scene, list_new(temp));
-			render = scene->strct;
 		}
-		//ft_draw_walls(vars, render);
 		ft_draw_walls(vars, scene);
-		//ft_render_lstclear(&render);
 		list_clear(&scene);
 		degree += DEG_INC;
 	}

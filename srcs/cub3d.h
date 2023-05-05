@@ -6,7 +6,7 @@
 /*   By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 11:43:14 by hel-makh          #+#    #+#             */
-/*   Updated: 2023/05/05 06:13:24 by sciftci          ###   ########.fr       */
+/*   Updated: 2023/05/05 19:37:26 by sciftci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,15 +124,7 @@ typedef struct s_obj {
 	int				x;
 	int				y;
 	double			frame;
-	//struct s_obj	*next;
 }	t_obj;
-
-// typedef struct s_door {
-// 	int				x;
-// 	int				y;
-// 	double			frame;
-// 	struct s_door	*next;
-// }	t_door;
 
 typedef struct s_content {
 	int	wall;
@@ -148,7 +140,6 @@ typedef struct s_render {
 	t_dim			wall_dim;
 	double			wall_orig_height;
 	int				ty;
-	//struct s_render	*next;
 }	t_render;
 
 struct s_list
@@ -229,21 +220,9 @@ double		ft_dtor(double degree);
 double		ft_radian_operations(double radian, double amout);
 void		ft_play_sound(char *path);
 
-// t_col		*ft_collectible_lstnew(int x, int y);
-// void		ft_collectible_lstadd_front(t_col **lst, t_col *new);
-// void		ft_collectible_lstdel(t_col **lst, int x, int y);
-// void		ft_collectible_lstclear(t_col **lst);
 //int			ft_collectible_frame(t_obj *lst, int x, int y);
 
-// t_door		*ft_door_lstnew(int x, int y, int frame);
-// void		ft_door_lstadd_front(t_door **lst, t_door *new);
-// void		ft_door_lstdel(t_door **lst, int x, int y);
-// void		ft_door_lstclear(t_door **lst);
 int			ft_door_frame(t_list *lst, int x, int y);
-
-// t_render	*ft_render_lstnew(void);
-// void		ft_render_lstadd_front(t_render **lst, t_render *new);
-// void		ft_render_lstclear(t_render **lst);
 
 /*************************[ Parsing ]*************************/
 int			ft_import_map(t_vars *vars, char *file);
