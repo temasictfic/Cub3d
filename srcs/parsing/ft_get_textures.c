@@ -6,7 +6,7 @@
 /*   By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 12:00:44 by hel-makh          #+#    #+#             */
-/*   Updated: 2023/04/15 16:54:37 by sciftci          ###   ########.fr       */
+/*   Updated: 2023/05/05 22:58:20 by sciftci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	ft_get_rgb_colors(int *color, char **info)
 		|| rgb[1] < 0 || rgb[1] > 255
 		|| rgb[2] < 0 || rgb[2] > 255)
 		return (printf("Error\nInvalid RGB combination.\n"), 0);
-	*color = ft_create_trgb(0, rgb[0], rgb[1], rgb[2]);
+	*color = create_trgb(0, rgb[0], rgb[1], rgb[2]);
 	return (1);
 }
 

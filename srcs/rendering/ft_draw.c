@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_draw_rays.c                                     :+:      :+:    :+:   */
+/*   ft_draw.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:06:14 by hel-makh          #+#    #+#             */
-/*   Updated: 2023/04/15 16:54:15 by sciftci          ###   ########.fr       */
+/*   Updated: 2023/05/05 23:12:30 by sciftci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ static void	ft_draw_line(t_vars *vars, t_coor dest, t_circle minimap)
 	steps *= C_SIDE_LEN;
 	coor.x = minimap.x;
 	coor.y = minimap.y;
-	while (steps >= 0 && ft_is_in_circle(coor.x, coor.y, minimap) == 1)
+	while (steps >= 0 && is_in_circle(coor.x, coor.y, minimap) == 1)
 	{
 		vars->mlx.img.data
 		[(int)round(coor.y) * WIDTH + (int)round(coor.x)]
-			= ft_create_trgb(0, 0, 255, 0);
+			= create_trgb(0, 0, 255, 0);
 		coor.x += inc.x;
 		coor.y += inc.y;
 		steps --;
@@ -48,12 +48,33 @@ void	ft_draw_rays(t_vars *vars, t_circle minimap)
 	degree = 0;
 	while (degree <= FOV)
 	{
-		angle = ft_radian_operations(vars->player.angle,
-				ft_dtor(degree - (FOV / 2)));
+		angle = radian_operations(vars->player.angle,
+				deg_to_rad(degree - (FOV / 2)));
 		hit_wall = ft_get_hit_wall(vars, vars->player.pos, angle, NULL);
 		while (vars->map.map[(int)hit_wall.y][(int)hit_wall.x] == O_DOOR)
 			hit_wall = ft_get_hit_wall(vars, hit_wall, angle, NULL);
 		ft_draw_line(vars, hit_wall, minimap);
 		degree += 2;
+	}
+}
+
+void	ft_draw_floor_ceilling(t_vars *vars)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < HEIGHT)
+	{
+		x = 0;
+		while (x < WIDTH)
+		{
+			if (y < HEIGHT / 2)
+				vars->mlx.img.data[y * WIDTH + x] = vars->map.ce_color;
+			else
+				vars->mlx.img.data[y * WIDTH + x] = vars->map.fl_color;
+			x ++;
+		}
+		y ++;
 	}
 }

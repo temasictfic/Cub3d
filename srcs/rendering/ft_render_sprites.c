@@ -6,7 +6,7 @@
 /*   By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/13 14:13:42 by hel-makh          #+#    #+#             */
-/*   Updated: 2023/05/05 19:35:41 by sciftci          ###   ########.fr       */
+/*   Updated: 2023/05/05 23:12:48 by sciftci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	ft_is_visible(t_vars *vars, t_obj *holder, int x)
 
 	spr.x = (double)holder->x + 0.5;
 	spr.y = (double)holder->y + 0.5;
-	if (ft_get_distance(vars->player.pos, spr) < vars->map.depth[x])
+	if (get_distance(vars->player.pos, spr) < vars->map.depth[x])
 		return (1);
 	return (0);
 }
@@ -54,7 +54,7 @@ static void
 				&& rend->tex.y >= 0 && rend->tex.y < img->height)
 			{
 				c = img->data[(int)rend->tex.y * img->width + (int)rend->tex.x];
-				if (c != ft_create_trgb(255, 0, 0, 0))
+				if (c != create_trgb(255, 0, 0, 0))
 					vars->mlx.img.data[j * WIDTH + i] = c;
 			}
 			j ++;
@@ -79,13 +79,13 @@ void	ft_render_sprites(t_vars *vars)
 		rend.col.y = (double)obj->y + 0.5;
 		rend.sc.x = vars->player.pos.x - rend.col.x;
 		rend.sc.y = vars->player.pos.y - rend.col.y;
-		angle = ft_radian_operations(vars->player.angle,
-				ft_dtor(FOV / 2.0) - atan2(rend.sc.y, rend.sc.x));
+		angle = radian_operations(vars->player.angle,
+				deg_to_rad(FOV / 2.0) - atan2(rend.sc.y, rend.sc.x));
 		rend.spr.height = (HEIGHT / 2)
-			/ ft_get_distance(vars->player.pos, rend.col);
+			/ get_distance(vars->player.pos, rend.col);
 		rend.spr.width = (HEIGHT / 2)
-			/ ft_get_distance(vars->player.pos, rend.col);
-		rend.sc.x = WIDTH - (angle * WIDTH / ft_dtor(FOV))
+			/ get_distance(vars->player.pos, rend.col);
+		rend.sc.x = WIDTH - (angle * WIDTH / deg_to_rad(FOV))
 			- (rend.spr.width / 2);
 		rend.sc.y = (HEIGHT / 2);
 		ft_draw_sprite(vars, &rend,

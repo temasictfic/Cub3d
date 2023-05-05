@@ -6,7 +6,7 @@
 /*   By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 22:27:23 by hel-makh          #+#    #+#             */
-/*   Updated: 2023/05/05 19:41:14 by sciftci          ###   ########.fr       */
+/*   Updated: 2023/05/05 23:12:25 by sciftci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	mouse_rotation(int x, int y, t_vars *vars)
 
 	(void)y;
 	diff = x - (WIDTH / 2);
-	vars->player.angle = ft_radian_operations(vars->player.angle,
+	vars->player.angle = radian_operations(vars->player.angle,
 			diff * vars->mlx.fspeed * (MOUSE_ROT_SPEED / 200.0));
 	mlx_mouse_move(vars->mlx.win, WIDTH / 2, HEIGHT / 2);
 	return (0);
@@ -29,16 +29,16 @@ static void	ft_get_player_direction(t_vars *vars)
 	double	direction_angle;
 
 	if (vars->player.rotate)
-		vars->player.angle = ft_radian_operations(vars->player.angle,
+		vars->player.angle = radian_operations(vars->player.angle,
 				vars->player.rotate * vars->mlx.fspeed * ROT_SPEED);
 	direction_angle = vars->player.angle;
 	if (vars->player.move.y == -1)
-		direction_angle = ft_radian_operations(direction_angle, M_PI);
+		direction_angle = radian_operations(direction_angle, M_PI);
 	else if (vars->player.move.x)
-		direction_angle = ft_radian_operations(direction_angle,
+		direction_angle = radian_operations(direction_angle,
 				-vars->player.move.x * M_PI_2);
 	if (vars->player.move.x && vars->player.move.y)
-		direction_angle = ft_radian_operations(direction_angle,
+		direction_angle = radian_operations(direction_angle,
 				vars->player.move.x * M_PI_4);
 	vars->player.dir.x = cos(direction_angle);
 	vars->player.dir.y = sin(direction_angle);

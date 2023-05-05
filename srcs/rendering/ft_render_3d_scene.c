@@ -6,7 +6,7 @@
 /*   By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 11:04:10 by hel-makh          #+#    #+#             */
-/*   Updated: 2023/05/05 19:35:04 by sciftci          ###   ########.fr       */
+/*   Updated: 2023/05/05 23:12:41 by sciftci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void
 	else
 		img = &vars->map.east;
 	color = ft_get_texture_pixel(*img, render);
-	if (color != ft_create_trgb(255, 0, 0, 0))
+	if (color != create_trgb(255, 0, 0, 0))
 		vars->mlx.img.data[y * WIDTH + x] = color;
 	if (ft_strchr(WALLS, vars->map.map[(int)render->hit_wall.y]
 			[(int)render->hit_wall.x]))
@@ -95,8 +95,8 @@ static void	ft_get_wall_dims(t_vars *vars, t_render *render,
 	render->degree = degree;
 	render->hit_wall = ft_get_hit_wall(vars, start_pos,
 			render->angle, &render->direc);
-	render->dist = ft_get_distance(vars->player.pos, render->hit_wall)
-		* cos(ft_radian_operations(vars->player.angle, -render->angle));
+	render->dist = get_distance(vars->player.pos, render->hit_wall)
+		* cos(radian_operations(vars->player.angle, -render->angle));
 	render->wall_dim.width = WIDTH / (FOV / DEG_INC);
 	render->wall_dim.height = HEIGHT;
 	if (render->dist > 0)
@@ -120,8 +120,8 @@ void	ft_render_3d_scene(t_vars *vars)
 		while (!scene|| (scene && vars->map.map[(int)((t_render *)(scene->strct))->hit_wall.y][(int)((t_render *)(scene->strct))->hit_wall.x] != WALL))
 		{
 			temp = ft_render_new();
-			temp->angle = ft_radian_operations(vars->player.angle,
-					ft_dtor(degree - (FOV / 2)));
+			temp->angle = radian_operations(vars->player.angle,
+					deg_to_rad(degree - (FOV / 2)));
 			if (!scene)
 				ft_get_wall_dims(vars, temp, vars->player.pos, degree);		
 			else

@@ -6,7 +6,7 @@
 /*   By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:30:10 by hel-makh          #+#    #+#             */
-/*   Updated: 2023/05/05 19:34:36 by sciftci          ###   ########.fr       */
+/*   Updated: 2023/05/05 23:11:15 by sciftci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	ft_open_close_door(t_vars *vars)
 		return ;
 	door.x = (double)((int)door.x) + 0.5;
 	door.y = (double)((int)door.y) + 0.5;
-	if (ft_get_distance(vars->player.pos, door) > 2.0)
+	if (get_distance(vars->player.pos, door) > 2.0)
 		return ;
 	if (vars->map.map[(int)door.y][(int)door.x] == C_DOOR
 		&& ft_door_frame(vars->map.doors, door.x, door.y) == 0)
