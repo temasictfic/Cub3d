@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/06 04:10:53 by sciftci           #+#    #+#             */
+/*   Updated: 2023/05/06 05:36:49 by sciftci          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub3d.h"
 
 int	create_trgb(int t, int r, int g, int b)
@@ -5,12 +17,12 @@ int	create_trgb(int t, int r, int g, int b)
 	return (t << 24 | r << 16 | g << 8 | b);
 }
 
-double	deg_to_rad(double degree)
+double	rad(double degree)
 {
 	return (degree * (M_PI / 180.0));
 }
 
-double	get_distance(t_coor point1, t_coor point2)
+double	get_dist(t_coor point1, t_coor point2)
 {
 	t_coor	dist;
 
@@ -33,8 +45,7 @@ int	is_in_circle(double x, double y, t_circle circle)
 	return (0);
 }
 
-//  %  mod  360 
-double	radian_operations(double radian, double amount)
+double	rad_op(double radian, double amount)
 {
 	radian += amount;
 	while (radian > 2 * M_PI)

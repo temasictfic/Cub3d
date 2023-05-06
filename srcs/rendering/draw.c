@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/23 11:06:14 by hel-makh          #+#    #+#             */
-/*   Updated: 2023/05/06 00:01:13 by sciftci          ###   ########.fr       */
+/*   Created: 2023/05/06 04:12:59 by sciftci           #+#    #+#             */
+/*   Updated: 2023/05/06 04:35:59 by sciftci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ static void	draw_line(t_vars *vars, t_coor dest, t_circle minimap)
 	while (steps >= 0 && is_in_circle(coor.x, coor.y, minimap) == 1)
 	{
 		vars->mlx.img.data
-		[(int)round(coor.y) * WIDTH + (int)round(coor.x)]
-			= create_trgb(0, 0, 255, 0);
+		[(int)round(coor.y) * WIDTH + (int)round(coor.x)] = create_trgb(0,
+				0, 255, 0);
 		coor.x += inc.x;
 		coor.y += inc.y;
-		steps --;
+		steps--;
 	}
 }
 
@@ -48,8 +48,8 @@ void	draw_rays(t_vars *vars, t_circle minimap)
 	degree = 0;
 	while (degree <= FOV)
 	{
-		angle = radian_operations(vars->player.angle,
-				deg_to_rad(degree - (FOV / 2)));
+		angle = rad_op(vars->player.angle,
+				rad(degree - (FOV / 2)));
 		hit_wall = get_hit_wall(vars, vars->player.pos, angle, NULL);
 		while (vars->map.map[(int)hit_wall.y][(int)hit_wall.x] == O_DOOR)
 			hit_wall = get_hit_wall(vars, hit_wall, angle, NULL);
@@ -73,8 +73,8 @@ void	draw_floor_ceilling(t_vars *vars)
 				vars->mlx.img.data[y * WIDTH + x] = vars->map.ce_color;
 			else
 				vars->mlx.img.data[y * WIDTH + x] = vars->map.fl_color;
-			x ++;
+			x++;
 		}
-		y ++;
+		y++;
 	}
 }

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/13 14:13:42 by hel-makh          #+#    #+#             */
-/*   Updated: 2023/05/06 00:10:30 by sciftci          ###   ########.fr       */
+/*   Created: 2023/05/06 04:11:48 by sciftci           #+#    #+#             */
+/*   Updated: 2023/05/06 04:51:09 by sciftci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,13 @@ static int	is_visible(t_vars *vars, t_obj *holder, int x)
 
 	spr.x = (double)holder->x + 0.5;
 	spr.y = (double)holder->y + 0.5;
-	if (get_distance(vars->player.pos, spr) < vars->map.depth[x])
+	if (get_dist(vars->player.pos, spr) < vars->map.depth[x])
 		return (1);
 	return (0);
 }
 
-static void draw_sprite(t_vars *vars, t_rend_spr *rend, t_img *img, t_obj *holder)//t_col *holder)
+static void	draw_sprite(t_vars *vars, t_rend_spr *rend, t_img *img,
+						t_obj *holder)
 {
 	int	i;
 	int	j;
@@ -56,9 +57,9 @@ static void draw_sprite(t_vars *vars, t_rend_spr *rend, t_img *img, t_obj *holde
 				if (c != create_trgb(255, 0, 0, 0))
 					vars->mlx.img.data[j * WIDTH + i] = c;
 			}
-			j ++;
+			j++;
 		}
-		i ++;
+		i++;
 	}
 }
 
@@ -72,23 +73,21 @@ void	render_sprites(t_vars *vars)
 	holder = vars->map.collectibles;
 	while (holder)
 	{
-		obj = holder->strct;
+		obj = holder->obj;
 		collectibles_animation(vars, obj);
 		rend.col.x = (double)obj->x + 0.5;
 		rend.col.y = (double)obj->y + 0.5;
 		rend.sc.x = vars->player.pos.x - rend.col.x;
 		rend.sc.y = vars->player.pos.y - rend.col.y;
-		angle = radian_operations(vars->player.angle,
-				deg_to_rad(FOV / 2.0) - atan2(rend.sc.y, rend.sc.x));
-		rend.spr.height = (HEIGHT / 2)
-			/ get_distance(vars->player.pos, rend.col);
-		rend.spr.width = (HEIGHT / 2)
-			/ get_distance(vars->player.pos, rend.col);
-		rend.sc.x = WIDTH - (angle * WIDTH / deg_to_rad(FOV))
-			- (rend.spr.width / 2);
+		angle = rad_op(vars->player.angle,
+				rad(FOV / 2.0) - atan2(rend.sc.y, rend.sc.x));
+		rend.spr.height = (HEIGHT / 2) / get_dist(vars->player.pos, rend.col);
+		rend.spr.width = (HEIGHT / 2) / get_dist(vars->player.pos, rend.col);
+		rend.sc.x = WIDTH - (angle * WIDTH / rad(FOV)) - (rend.spr.width
+				/ 2);
 		rend.sc.y = (HEIGHT / 2);
-		draw_sprite(vars, &rend,
-			&vars->map.collectible.img[(int)obj->frame], obj);
+		draw_sprite(vars, &rend, &vars->map.collectible.img[(int)obj->frame],
+			obj);
 		holder = holder->next;
 	}
 }

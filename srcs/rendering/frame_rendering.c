@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/21 16:44:23 by hel-makh          #+#    #+#             */
-/*   Updated: 2023/05/06 00:09:03 by sciftci          ###   ########.fr       */
+/*   Created: 2023/05/06 04:12:32 by sciftci           #+#    #+#             */
+/*   Updated: 2023/05/06 05:05:24 by sciftci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,43 +16,16 @@ int	init_images(t_vars *vars)
 {
 	vars->mlx.img.img = mlx_new_image(vars->mlx.mlx, WIDTH, HEIGHT);
 	if (!vars->mlx.img.img)
-		return (printf("Error\nCouldn't create images.\n"), 0);
+		return (perror("Error\nCouldn't create images.\n"), 0);
 	vars->mlx.img.data = (int *)mlx_get_data_addr(vars->mlx.img.img,
 			&vars->mlx.img.bpp, &vars->mlx.img.line_len,
 			&vars->mlx.img.endian);
 	return (1);
 }
 
-// static void	ft_fps_counter(t_vars *vars)
-// {
-// 	static long	prev_timestamp;
-// 	static long	counter;
-// 	static int	frames;
-
-// 	if (!prev_timestamp)
-// 		prev_timestamp = ft_get_current_time();
-// 	vars->mlx.fspeed = (ft_get_current_time() - prev_timestamp) / 1000.0;
-// 	prev_timestamp = ft_get_current_time();
-// 	if (!counter)
-// 		counter = ft_get_current_time() + 1000;
-// 	if (counter <= ft_get_current_time())
-// 	{
-// 		counter = ft_get_current_time() + 1000;
-// 		vars->mlx.fps = frames;
-// 		frames = 0;
-// 	}
-// 	frames ++;
-// 	//dprintf(2, "%d $", vars->mlx.fps);
-// 	dprintf(2, "%f $", vars->mlx.fspeed);
-// }
-
 int	frame_rendering(t_vars *vars)
 {
-	//char	*fps;
-
-	//ft_fps_counter(vars);
-	vars->mlx.fspeed = 0.045;
-	vars->mlx.fps = 40;
+	vars->mlx.fspeed = 0.04;
 	move_player(vars);
 	door_animation(vars);
 	render_scene(vars);
@@ -61,9 +34,5 @@ int	frame_rendering(t_vars *vars)
 	mlx_clear_window(vars->mlx.mlx, vars->mlx.win);
 	mlx_put_image_to_window(vars->mlx.mlx, vars->mlx.win,
 		vars->mlx.img.img, 0, 0);
-	// fps = ft_itoa(vars->mlx.fps);
-	// mlx_string_put(vars->mlx.mlx, vars->mlx.win, FPS_X, FPS_Y,
-	// 	ft_create_trgb(0, 0, 255, 0), fps);
-	// fps = ft_free(fps);
 	return (1);
 }

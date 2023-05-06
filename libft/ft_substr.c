@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hel-makh <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/02 10:21:16 by hel-makh          #+#    #+#             */
-/*   Updated: 2021/11/02 10:49:58 by hel-makh         ###   ########.fr       */
+/*   Created: 2023/05/06 04:02:50 by sciftci           #+#    #+#             */
+/*   Updated: 2023/05/06 04:02:54 by sciftci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 
 static char	*ft_strncpy(char *dst, const char *src, size_t len)

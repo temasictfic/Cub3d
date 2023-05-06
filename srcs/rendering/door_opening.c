@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/04 17:30:10 by hel-makh          #+#    #+#             */
-/*   Updated: 2023/05/06 00:18:13 by sciftci          ###   ########.fr       */
+/*   Created: 2023/05/06 04:13:09 by sciftci           #+#    #+#             */
+/*   Updated: 2023/05/06 04:51:09 by sciftci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 int	door_frame(t_list *lst, int x, int y)
 {
-	t_obj *obj;
+	t_obj	*obj;
+
 	while (lst)
 	{
-		obj = lst->strct;
+		obj = lst->obj;
 		if (obj->x == x && obj->y == y)
 			return ((int)obj->frame);
 		lst = lst->next;
@@ -27,15 +28,15 @@ int	door_frame(t_list *lst, int x, int y)
 
 void	door_animation(t_vars *vars)
 {
-	t_list *holder;
-	t_list *next_holder;
-	t_obj *obj;
+	t_list	*holder;
+	t_list	*next_holder;
+	t_obj	*obj;
 	double	new_frame;
 
 	holder = vars->map.doors;
 	while (holder)
 	{
-		obj = holder->strct;
+		obj = holder->obj;
 		if (vars->map.map[obj->y][obj->x] == O_DOOR)
 			new_frame = obj->frame + (vars->mlx.fspeed * 20);
 		else
@@ -62,7 +63,7 @@ void	open_close_door(t_vars *vars)
 		return ;
 	door.x = (double)((int)door.x) + 0.5;
 	door.y = (double)((int)door.y) + 0.5;
-	if (get_distance(vars->player.pos, door) > 2.0)
+	if (get_dist(vars->player.pos, door) > 2.0)
 		return ;
 	if (vars->map.map[(int)door.y][(int)door.x] == C_DOOR
 		&& door_frame(vars->map.doors, door.x, door.y) == 0)
@@ -71,8 +72,8 @@ void	open_close_door(t_vars *vars)
 		vars->map.map[(int)door.y][(int)door.x] = O_DOOR;
 	}
 	else if (vars->map.map[(int)door.y][(int)door.x] == O_DOOR
-		&& door_frame(vars->map.doors, door.x, door.y)
-			== vars->map.door.frames - 1)
+			&& door_frame(vars->map.doors, door.x,
+				door.y) == vars->map.door.frames - 1)
 	{
 		vars->map.map[(int)door.y][(int)door.x] = C_DOOR;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_arrlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/01 16:38:14 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/03/24 15:06:30 by hel-makh         ###   ########.fr       */
+/*   Created: 2023/05/06 02:33:17 by sciftci           #+#    #+#             */
+/*   Updated: 2023/05/06 03:58:23 by sciftci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,6 @@ size_t	ft_arrlen(char **arr)
 
 	arrlen = 0;
 	while (arr[arrlen])
-		arrlen ++;
+		arrlen++;
 	return (arrlen);
 }
