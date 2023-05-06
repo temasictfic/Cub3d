@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exit_game.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/06 04:11:08 by sciftci           #+#    #+#             */
+/*   Updated: 2023/05/06 04:51:33 by sciftci          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub3d.h"
 
 static void	destroy_image(t_vars *vars, t_img *img)
@@ -14,7 +26,7 @@ static void	destroy_sprite(t_vars *vars, t_spr *spr)
 	while (i < spr->frames)
 	{
 		destroy_image(vars, &spr->img[i]);
-		i ++;
+		i++;
 	}
 	spr->img = ft_free(spr->img);
 }

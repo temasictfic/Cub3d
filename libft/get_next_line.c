@@ -3,21 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/16 19:22:20 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/08/16 14:29:13 by hel-makh         ###   ########.fr       */
+/*   Created: 2023/05/06 04:03:17 by sciftci           #+#    #+#             */
+/*   Updated: 2023/05/06 04:03:32 by sciftci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <fcntl.h>
-#include <stdlib.h>
 #include "libft.h"
 
-static char	*get_fd_content(int fd, t_list **fd_list)
+static char	*get_fd_content(int fd, t_llist **fd_list)
 {
-	t_list	*holder;
+	t_llist	*holder;
 
 	holder = *fd_list;
 	while (holder)
@@ -30,11 +27,11 @@ static char	*get_fd_content(int fd, t_list **fd_list)
 }
 
 static void	set_fd_content(
-	int fd, t_list **fd_list, char content[BUFFER_SIZE + 1]
+	int fd, t_llist **fd_list, char content[BUFFER_SIZE + 1]
 	)
 {
-	t_list	*holder;
-	t_list	*new_list;
+	t_llist	*holder;
+	t_llist	*new_list;
 
 	holder = *fd_list;
 	while (holder)
@@ -46,7 +43,7 @@ static void	set_fd_content(
 		}
 		holder = holder->next;
 	}
-	new_list = ft_calloc(1, sizeof(t_list));
+	new_list = ft_calloc(1, sizeof(t_llist));
 	if (new_list == NULL)
 		return ;
 	new_list->fd = fd;
@@ -57,10 +54,10 @@ static void	set_fd_content(
 	(*fd_list)->next = holder;
 }
 
-static void	del_fd_content(int fd, t_list **fd_list)
+static void	del_fd_content(int fd, t_llist **fd_list)
 {
-	t_list	*holder;
-	t_list	*prev_holder;
+	t_llist	*holder;
+	t_llist	*prev_holder;
 
 	holder = *fd_list;
 	if (holder && holder->fd == fd)
@@ -84,7 +81,7 @@ static void	del_fd_content(int fd, t_list **fd_list)
 }
 
 static int	read_next_line(
-	int fd, t_list **fd_list, char **next_line, char buffer[BUFFER_SIZE + 1]
+	int fd, t_llist **fd_list, char **next_line, char buffer[BUFFER_SIZE + 1]
 	)
 {
 	int		ret;
@@ -107,7 +104,7 @@ static int	read_next_line(
 
 char	*get_next_line(int fd)
 {
-	static t_list	*fd_list;
+	static t_llist	*fd_list;
 	char			*next_line;
 	char			buffer[BUFFER_SIZE + 1];
 	char			*has_newline;

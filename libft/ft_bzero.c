@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hel-makh <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/01 18:45:56 by hel-makh          #+#    #+#             */
-/*   Updated: 2021/11/01 18:45:58 by hel-makh         ###   ########.fr       */
+/*   Created: 2023/05/06 03:59:10 by sciftci           #+#    #+#             */
+/*   Updated: 2023/05/06 03:59:10 by sciftci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 
 void	ft_bzero(void *s, size_t n)
@@ -23,6 +22,6 @@ void	ft_bzero(void *s, size_t n)
 	while (i < n)
 	{
 		buffer[i] = '\0';
-		i ++;
+		i++;
 	}
 }

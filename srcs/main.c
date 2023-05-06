@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/05 11:49:49 by hel-makh          #+#    #+#             */
-/*   Updated: 2023/05/06 00:24:49 by sciftci          ###   ########.fr       */
+/*   Created: 2023/05/06 04:08:56 by sciftci           #+#    #+#             */
+/*   Updated: 2023/05/06 05:07:32 by sciftci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,10 @@ static void	init_mlx(t_vars *vars)
 {
 	vars->mlx.win = NULL;
 	vars->mlx.img.img = NULL;
-	vars->mlx.fps = 0;
 	vars->mlx.mlx = mlx_init();
 	if (!vars->mlx.mlx)
 	{
-		printf("Error\nCouldn't initialize mlx.\n");
+		perror("Error\nCouldn't initialize mlx.\n");
 		exit(EXIT_FAILURE);
 	}
 }
@@ -30,7 +29,7 @@ static void	start_game(t_vars *vars)
 	vars->mlx.win = mlx_new_window(vars->mlx.mlx, WIDTH, HEIGHT, "cub3d");
 	if (!vars->mlx.win)
 	{
-		printf("Error\nCouldn't open window.\n");
+		perror("Error\nCouldn't open window.\n");
 		exit_game(vars, EXIT_FAILURE);
 	}
 	vars->player.move.x = 0;
@@ -50,9 +49,15 @@ int	main(int argc, char **argv)
 	t_vars	vars;
 
 	if (argc < 2)
-		return (printf("Error\nMissing map file.\n%s\n", USAGE), EXIT_FAILURE);
+	{
+		perror("Error\nMissing map file.\n");
+		return (perror(USAGE), EXIT_FAILURE);
+	}
 	else if (argc > 2)
-		return (printf("Error\nInvalid arguments.\n%s\n", USAGE), EXIT_FAILURE);
+	{
+		perror("Error\nInvalid arguments.\n");
+		return (perror(USAGE), EXIT_FAILURE);
+	}
 	init_mlx(&vars);
 	if (!import_map(&vars, argv[1]))
 		exit_game(&vars, EXIT_FAILURE);

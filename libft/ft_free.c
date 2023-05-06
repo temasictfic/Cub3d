@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/26 16:58:07 by hel-makh          #+#    #+#             */
-/*   Updated: 2022/03/24 15:06:26 by hel-makh         ###   ########.fr       */
+/*   Created: 2023/05/06 02:33:50 by sciftci           #+#    #+#             */
+/*   Updated: 2023/05/06 05:37:02 by sciftci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,5 @@ void	*ft_free_2d(char **array)
 	while (array[i])
 		free(array[i++]);
 	free(array);
-	return (NULL);
-}
-
-void	*ft_free_3d(char ***array)
-{
-	int	i;
-
-	if (!array)
-		return (NULL);
-	i = 0;
-	while (array[i])
-		ft_free_2d(array[i++]);
 	return (NULL);
 }

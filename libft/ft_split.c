@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hel-makh <hel-makh@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/02 13:55:32 by hel-makh          #+#    #+#             */
-/*   Updated: 2021/12/29 11:53:58 by hel-makh         ###   ########.fr       */
+/*   Created: 2023/05/06 04:01:26 by sciftci           #+#    #+#             */
+/*   Updated: 2023/05/06 04:01:31 by sciftci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 
 static char	**ft_free_arr(int i, char **arr)

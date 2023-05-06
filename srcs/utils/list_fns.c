@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_fns.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/06 04:11:01 by sciftci           #+#    #+#             */
+/*   Updated: 2023/05/06 05:49:27 by sciftci          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub3d.h"
 
 t_obj	*obj_new(int x, int y, int frame)
 {
 	t_obj	*element;
 
-	element = malloc (1 * sizeof(t_obj));
+	element = malloc(1 * sizeof(t_obj));
 	if (element == NULL)
 		return (NULL);
 	element->x = x;
@@ -13,14 +25,14 @@ t_obj	*obj_new(int x, int y, int frame)
 	return (element);
 }
 
-t_list	*list_new(void *strct)
+t_list	*list_new(void *obj)
 {
 	t_list	*lst;
 
-	lst = malloc (1 * sizeof(t_list));
+	lst = malloc(1 * sizeof(t_list));
 	if (lst == NULL)
 		return (NULL);
-	lst->strct = strct;
+	lst->obj = obj;
 	lst->next = NULL;
 	return (lst);
 }
@@ -44,39 +56,36 @@ void	list_clear(t_list **lst)
 	{
 		head = *lst;
 		*lst = (*lst)->next;
-		free(head->strct);
-		head = ft_free(head); // strct kısmını freelemeyi unutma!
+		ft_free(head->obj);
+		head = ft_free(head);
 	}
 	*lst = NULL;
 }
 
 void	list_remove(t_list **lst, int x, int y)
 {
-	t_list *prev;
-	t_list *holder;
-	t_obj  *obj;
+	t_list	*prev;
+	t_list	*cur;
 
 	prev = *lst;
-	holder = *lst;
-	obj = holder->strct;
-	if (holder && obj->x == x && obj->y == y)
+	cur = *lst;
+	if (cur && ((t_obj *)(cur->obj))->x == x && ((t_obj *)(cur->obj))->y == y)
 	{
 		*lst = (*lst)->next;
-		free(obj);
-		holder = ft_free(holder);  // strct kısmını freelemeyi unutma!
-		return;
+		ft_free((t_obj *)(cur->obj));
+		cur = ft_free(cur);
+		return ;
 	}
-	while (holder)
+	while (cur)
 	{
-		obj = holder->strct;
-		if (obj->x == x && obj->y == y)
+		if (((t_obj *)(cur->obj))->x == x && ((t_obj *)(cur->obj))->y == y)
 		{
-			prev->next = holder->next;
-			free(obj);
-			holder = ft_free(holder);  // strct kısmını freelemeyi unutma!
-			return;
+			prev->next = cur->next;
+			ft_free((t_obj *)(cur->obj));
+			cur = ft_free(cur);
+			return ;
 		}
-		prev = holder;
-		holder = holder->next;
+		prev = cur;
+		cur = cur->next;
 	}
 }

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/21 10:41:39 by hel-makh          #+#    #+#             */
-/*   Updated: 2023/05/06 00:18:02 by sciftci          ###   ########.fr       */
+/*   Created: 2023/05/06 04:14:15 by sciftci           #+#    #+#             */
+/*   Updated: 2023/05/06 04:16:03 by sciftci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void	get_player_angle(t_vars *vars)
 {
-	int		x;
-	int		y;
+	int	x;
+	int	y;
 
 	x = vars->player.pos.x;
 	y = vars->player.pos.y;
@@ -47,11 +47,13 @@ void	get_player_position(t_vars *vars)
 				get_player_angle(vars);
 			}
 			else if (vars->map.map[i][j] == COLLECTIBLE)
-				list_add_front(&vars->map.collectibles, list_new(obj_new(j, i, 1)));
+				list_add_front(&vars->map.collectibles, list_new(obj_new(j, i,
+							1)));
 			else if (vars->map.map[i][j] == O_DOOR)
-				list_add_front(&vars->map.doors, list_new(obj_new(j, i, vars->map.door.frames - 1)));
-			j ++;
+				list_add_front(&vars->map.doors, list_new(obj_new(j, i,
+							vars->map.door.frames - 1)));
+			j++;
 		}
-		i ++;
+		i++;
 	}
 }

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/07 13:48:05 by hel-makh          #+#    #+#             */
-/*   Updated: 2023/05/05 23:48:04 by sciftci          ###   ########.fr       */
+/*   Created: 2023/05/06 04:13:39 by sciftci           #+#    #+#             */
+/*   Updated: 2023/05/06 04:23:33 by sciftci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ static int	read_map(t_map *map, int fd)
 		if (*line)
 		{
 			if (ft_arrlen(map->map) && empty_line)
-				return (printf("Error\nInvalid map.\n"), ft_free(line), 0);
-			map->map = ft_add_str2arr(map->map, line);
+				return (perror("Error\nInvalid map.\n"), ft_free(line), 0);
+			map->map = ft_push_str(map->map, line);
 			if (map->map == NULL)
 				return (ft_free(line), 0);
 		}
@@ -44,11 +44,7 @@ static int	read_map(t_map *map, int fd)
 static int	check_component(t_map *map, int i, int j, t_content *content)
 {
 	if (!ft_strchr(" 0123NSEWC", map->map[i][j]))
-	{
-		printf("Error\nInvalid map: Invalid component [%c]."
-			"\nLine: %d, Column: %d\n", map->map[i][j], i + 1, j + 1);
-		return (0);
-	}
+		return (perror("Error\nInvalid map: Invalid component.\n"), 0);
 	else if (map->map[i][j] == WALL)
 		content->wall ++;
 	else if (map->map[i][j] == P_NORTH || map->map[i][j] == P_SOUTH
@@ -75,11 +71,11 @@ static int	check_map_content(t_map *map)
 		i ++;
 	}
 	if (!content.wall)
-		return (printf("Error\nInvalid map: Map not closed.\n"), 0);
+		return (perror("Error\nInvalid map: Map not closed.\n"), 0);
 	else if (content.player < 1)
-		return (printf("Error\nInvalid map: Missing player.\n"), 0);
+		return (perror("Error\nInvalid map: Missing player.\n"), 0);
 	else if (content.player > 1)
-		return (printf("Error\nInvalid map: Too many players.\n"), 0);
+		return (perror("Error\nInvalid map: Too many players.\n"), 0);
 	return (1);
 }
 
@@ -111,7 +107,7 @@ int	parse_map(t_map *map, int fd)
 	if (!read_map(map, fd))
 		return (0);
 	if (!ft_arrlen(map->map))
-		return (printf("Error\nInvalid map.\n"), 0);
+		return (perror("Error\nInvalid map.\n"), 0);
 	if (!check_map_content(map))
 		return (0);
 	if (!is_map_closed(map))
