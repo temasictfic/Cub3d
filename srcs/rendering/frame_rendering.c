@@ -6,7 +6,7 @@
 /*   By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 04:12:32 by sciftci           #+#    #+#             */
-/*   Updated: 2023/05/11 17:11:17 by sciftci          ###   ########.fr       */
+/*   Updated: 2023/05/11 19:18:29 by sciftci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	init_images(t_vars *vars)
 {
 	vars->mlx.img.img = mlx_new_image(vars->mlx.mlx, WIDTH, HEIGHT);
 	if (!vars->mlx.img.img)
-		return (perror("Error\nCouldn't create images.\n"), 0);
+		return (printf("Error\nCouldn't create images.\n"), 0);
 	vars->mlx.img.data = (int *)mlx_get_data_addr(vars->mlx.img.img,
 			&vars->mlx.img.bpp, &vars->mlx.img.line_len,
 			&vars->mlx.img.endian);

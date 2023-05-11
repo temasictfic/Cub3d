@@ -6,7 +6,7 @@
 /*   By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 04:14:15 by sciftci           #+#    #+#             */
-/*   Updated: 2023/05/06 04:16:03 by sciftci          ###   ########.fr       */
+/*   Updated: 2023/05/11 19:03:51 by sciftci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void	get_player_position(t_vars *vars)
 		{
 			if (ft_strchr("NSEW", vars->map.map[i][j]))
 			{
-				vars->player.pos.x = (double)j + 0.5;
-				vars->player.pos.y = (double)i + 0.5;
+				vars->player.pos.x = (double)j;
+				vars->player.pos.y = (double)i;
 				get_player_angle(vars);
 			}
 			else if (vars->map.map[i][j] == COLLECTIBLE)

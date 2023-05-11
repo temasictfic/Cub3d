@@ -6,7 +6,7 @@
 /*   By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 04:13:23 by sciftci           #+#    #+#             */
-/*   Updated: 2023/05/06 04:13:26 by sciftci          ###   ########.fr       */
+/*   Updated: 2023/05/11 19:17:56 by sciftci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int	is_duplicated(t_map *map, char **info)
 		|| (!ft_strcmp(info[0], "DO") && map->door.img)
 		|| (!ft_strcmp(info[0], "F") && map->fl_color != -1)
 		|| (!ft_strcmp(info[0], "C") && map->ce_color != -1))
-		return (perror("Error\nDuplicated textures [%s].\n"), 1);
+		return (printf("Error\nDuplicated textures [%s].\n", info[0]), 1);
 	return (0);
 }
 
@@ -45,7 +45,7 @@ static int	is_valid_format(char **info)
 		|| (!ft_strcmp(info[0], "DO") && ft_arrlen(info) < 2)
 		|| (!ft_strcmp(info[0], "F") && ft_arrlen(info) != 2)
 		|| (!ft_strcmp(info[0], "C") && ft_arrlen(info) != 2))
-		return (perror("Error\nInvalid texture format.\n"), 0);
+		return (printf("Error\nInvalid texture format [%s].\n", info[0]), 0);
 	return (1);
 }
 
@@ -58,7 +58,7 @@ int	parse_textures(t_vars *vars, int fd)
 	{
 		line = get_next_line(fd);
 		if (!line)
-			return (perror("Error\nMissing textures.\n"), 0);
+			return (printf("Error\nMissing textures.\n"), 0);
 		if (*line)
 		{
 			info = ft_split(line, ' ');

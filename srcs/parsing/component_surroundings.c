@@ -6,7 +6,7 @@
 /*   By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 04:14:01 by sciftci           #+#    #+#             */
-/*   Updated: 2023/05/06 04:14:03 by sciftci          ###   ########.fr       */
+/*   Updated: 2023/05/11 19:12:51 by sciftci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,20 +76,24 @@ static int	wall_right_placed(char **map, int i, int j)
 int	component_surroundings(char **map, int i, int j)
 {
 	if (map[i][j] == SPACE && is_component_surrounded(map, i, j))
-		return (perror("Error\nInvalid map: misplaced spaces.\n"), 0);
+		return (printf("Error\nInvalid map: misplaced [%c] space(s)."
+				"\nLine: %d, Column: %d\n", map[i][j], i + 1, j + 1), 0);
 	else if (ft_strchr("0NSEWC", map[i][j]))
 	{
 		if (is_space_surrounded(map, i, j))
 		{
 			if (map[i][j] == EMPTY_SPACE)
-				perror("Error\nInvalid map: misplaced empty space.\n");
+				printf("Error\nInvalid map: misplaced [%c] empty space(s)."
+					"\nLine: %d, Column: %d\n", map[i][j], i + 1, j + 1);
 			else
-				perror("Error\nInvalid map: misplaced player position.\n");
+				printf("Error\nInvalid map: misplaced [%c] player position."
+					"\nLine: %d, Column: %d\n", map[i][j], i + 1, j + 1);
 			return (0);
 		}
 	}
 	else if ((map[i][j] == C_DOOR || map[i][j] == O_DOOR)
 		&& !wall_right_placed(map, i, j))
-		return (perror("Error\nInvalid map: misplaced wall.\n"), 0);
+		return (printf("Error\nInvalid map: misplaced [%c] wall."
+				"\nLine: %d, Column: %d\n", map[i][j], i + 1, j + 1), 0);
 	return (1);
 }
