@@ -6,7 +6,7 @@
 /*   By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 04:08:56 by sciftci           #+#    #+#             */
-/*   Updated: 2023/05/06 05:07:32 by sciftci          ###   ########.fr       */
+/*   Updated: 2023/05/11 17:52:52 by sciftci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static void	init_mlx(t_vars *vars)
 	vars->mlx.win = NULL;
 	vars->mlx.img.img = NULL;
 	vars->mlx.mlx = mlx_init();
+	vars->mlx.fspeed = 0.1;
 	if (!vars->mlx.mlx)
 	{
 		perror("Error\nCouldn't initialize mlx.\n");

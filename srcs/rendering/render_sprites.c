@@ -6,7 +6,7 @@
 /*   By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 04:11:48 by sciftci           #+#    #+#             */
-/*   Updated: 2023/05/06 04:51:09 by sciftci          ###   ########.fr       */
+/*   Updated: 2023/05/11 18:40:29 by sciftci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	collectibles_animation(t_vars *vars, t_obj *collectible)
 {
 	double	new_frame;
 
-	new_frame = collectible->frame + (vars->mlx.fspeed * 10);
+	new_frame = collectible->frame + C_FRAME;
 	if ((int)new_frame < vars->map.collectible.frames)
 		collectible->frame = new_frame;
 	else

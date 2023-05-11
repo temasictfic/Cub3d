@@ -6,7 +6,7 @@
 /*   By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 04:10:27 by sciftci           #+#    #+#             */
-/*   Updated: 2023/05/06 05:06:38 by sciftci          ###   ########.fr       */
+/*   Updated: 2023/05/11 18:43:11 by sciftci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 # include <unistd.h>
 
 # define USAGE "Usage: ./cub3d <file.cub>"
-# define DEG_INC 0.06
 
 /************************[ Components ]***********************/
 # define SPACE ' '
@@ -45,6 +44,13 @@
 # define EVENT_ON_MOUSEMOVE 6
 # define EVENT_ON_DESTROY 17
 # define NO_MASK 0
+
+/**********************[ Constants ]**********************/
+# define FOV 75
+# define STEP 0.1
+# define C_FRAME 0.3
+# define D_FRAME 1
+# define DEG_INC 0.06
 
 /**********************[ Configuration ]**********************/
 
@@ -76,22 +82,7 @@ enum				e_minimap
 	PL_RADIUS = 2
 };
 
-enum				e_player
-{
-	SPEED = 4,
-	ROT_SPEED = 3,
-	MOUSE_ROT_SPEED = 5,
-	FOV = 75
-};
-
 /************************[ Structers ]************************/
-//24
-typedef struct s_circle
-{
-	double			x;
-	double			y;
-	double			radius;
-}					t_circle;
 
 //16
 typedef struct s_dim
@@ -107,6 +98,14 @@ typedef struct s_coor
 	double			y;
 }					t_coor;
 
+//24
+typedef struct s_circle
+{
+	double			x;
+	double			y;
+	double			radius;
+}					t_circle;
+
 //16
 typedef struct s_obj
 {
@@ -114,6 +113,13 @@ typedef struct s_obj
 	int				y;
 	double			frame;
 }					t_obj;
+
+//16
+typedef struct s_list
+{
+	void			*obj;
+	struct s_list	*next;
+}					t_list;
 
 //8
 typedef struct s_content
@@ -134,13 +140,6 @@ typedef struct s_render
 	int				direc;
 	int				ty;
 }					t_rend;
-
-//16
-typedef struct s_list
-{
-	void			*obj;
-	struct s_list	*next;
-}					t_list;
 
 //64
 typedef struct s_rend_spr

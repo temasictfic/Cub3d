@@ -6,7 +6,7 @@
 /*   By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 04:13:09 by sciftci           #+#    #+#             */
-/*   Updated: 2023/05/06 04:51:09 by sciftci          ###   ########.fr       */
+/*   Updated: 2023/05/11 18:40:09 by sciftci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ void	door_animation(t_vars *vars)
 	{
 		obj = holder->obj;
 		if (vars->map.map[obj->y][obj->x] == O_DOOR)
-			new_frame = obj->frame + (vars->mlx.fspeed * 20);
+			new_frame = obj->frame + D_FRAME;
 		else
-			new_frame = obj->frame - (vars->mlx.fspeed * 20);
+			new_frame = obj->frame - D_FRAME;
 		if ((int)new_frame < vars->map.door.frames)
 			obj->frame = new_frame;
 		if (obj->frame <= 0)

@@ -6,7 +6,7 @@
 /*   By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 04:12:32 by sciftci           #+#    #+#             */
-/*   Updated: 2023/05/06 05:05:24 by sciftci          ###   ########.fr       */
+/*   Updated: 2023/05/11 17:11:17 by sciftci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	init_images(t_vars *vars)
 
 int	frame_rendering(t_vars *vars)
 {
-	vars->mlx.fspeed = 0.04;
 	move_player(vars);
 	door_animation(vars);
 	render_scene(vars);
