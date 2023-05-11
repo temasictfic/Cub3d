@@ -6,7 +6,7 @@
 /*   By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 04:10:27 by sciftci           #+#    #+#             */
-/*   Updated: 2023/05/11 18:43:11 by sciftci          ###   ########.fr       */
+/*   Updated: 2023/05/11 19:36:58 by sciftci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@
 # define C_FRAME 0.3
 # define D_FRAME 1
 # define DEG_INC 0.06
+# define MID_OFFSET 0.5
 
 /**********************[ Configuration ]**********************/
 
