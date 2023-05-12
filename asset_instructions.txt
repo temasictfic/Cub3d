@@ -1,0 +1,5 @@
+find backgrounf transparent gif
+go to ezgif.com frames bar and reduce frames
+go to split bar and make gif as png and download pictures
+go to https://anyconv.com/png-to-xpm-converter/ to convert png to xpm
+or go to https://www.freefileconvert.com/ one by one convert png to xpm
