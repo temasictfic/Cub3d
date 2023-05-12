@@ -152,7 +152,7 @@ def texturesTxt():
     SO = [d for d in dirlist if d.startswith('wall_south')]
     WE = [d for d in dirlist if d.startswith('wall_west')]
     EA = [d for d in dirlist if d.startswith('wall_east')]
-    CO = [d for d in dirlist if d.startswith('baby')]
+    CO = [d for d in dirlist if d.startswith('nezuko')]
     DO = [d for d in dirlist if d.startswith('door')]
     dic = {'NO': NO, 'SO': SO, 'WE': WE, 'EA': EA, 'CO': CO, 'DO': DO}
     string = ""
