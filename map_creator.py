@@ -1,11 +1,12 @@
 #!/usr/bin/python3
 
 ################################################################################
-# wta & awoimbee | Wolf3D Map Generator                                        #
+# wta & awoimbee | Cub3D Map Generator                                        #
 ################################################################################
 
 import tkinter as tk
-import sys
+import sys, os, time
+import random
 
 class Player:
     def __init__(self, isSet=False, pos=(0, 0)):
@@ -13,18 +14,28 @@ class Player:
         self.pos = pos
 
 def display():
-    "Affiche un tableau dans le canvas à partir de la liste"
+    "Display an array in the canvas from the list"
     global board
 
-    #Effacer toute les cellules
+    #Delete all cells
     canvas.delete("cell")
 
-    #Coordonnées dans le canvas qui servent à placer les carrés
+    #Coordinates in the canvas used to place the squares
     x, y = 0, 0
-    #Parcours du tableau de long en large
+    #Path the table up and down
     for row in range(len(board)):
         for column in range(len(board[0])):
-            if board[row][column] == 1:
+            if board[row][column] == 'C':
+                canvas.create_rectangle(
+                    x,
+                    y,
+                    x+caseSize,
+                    y+caseSize,
+                    fill="yellow",
+                    tag="cell",
+                    outline="grey"
+                )
+            elif board[row][column] == 1:
                 canvas.create_rectangle(
                     x,
                     y,
@@ -35,6 +46,26 @@ def display():
                     outline="grey"
                 )
             elif board[row][column] == 64:
+                canvas.create_rectangle(
+                    x,
+                    y,
+                    x+caseSize,
+                    y+caseSize,
+                    fill="cyan",
+                    tag="cell",
+                    outline="grey"
+                )
+            elif board[row][column] == 2:
+                canvas.create_rectangle(
+                    x,
+                    y,
+                    x+caseSize,
+                    y+caseSize,
+                    fill="red",
+                    tag="cell",
+                    outline="grey"
+                )
+            elif board[row][column] == 3:
                 canvas.create_rectangle(
                     x,
                     y,
@@ -52,6 +83,10 @@ def display():
 def is_not_border(x, y):
     return 0 < y < mapHeight - 1 and 0 < x < mapWidth - 1
 
+def is_prev_wall(board, x, y):
+    if x-1 >= 0 and x + 1 < mapWidth:
+        return(not(board[y][x-1] == 2 or board[y][x-1] == 3))
+    return (1)
 
 def placeThing(event):
     ## canvas coordinates -> last_dragboard coordinates
@@ -63,16 +98,29 @@ def placeThing(event):
             return
         else:
             placeThing.lastDrag = (event.x, event.y, event.state)
-
+    #https://anzeljg.github.io/rin2/book2/2405/docs/tkinter/event-handlers.html
     if is_not_border(event.x, event.y):
         isPlayerLoc = board[event.y][event.x] == 64
-        ## Left click
-        if event.state == 256 or event.num == 1:
+        ## Control and Left Click => COLLECTIBLE
+        if event.state == 4 and event.num == 1:
+            board[event.y][event.x] = 'C'
+        ## Left Click => WALL
+        elif event.state == 256 or event.num == 1:
             if isPlayerLoc:
                 player.isSet = False
             board[event.y][event.x] = int(not board[event.y][event.x])
+        ## Shift and Right Click  => OPEN_DOOR
+        elif event.state == 1 and event.num == 2:
+                board[event.y][event.x] = 3
+        ## Right Click  => CLOSED_DOOR
+        elif event.state == 512 or event.num == 2:
+            if board[event.y][event.x] == 2:
+                board[event.y][event.x] = 1
+            else:
+                board[event.y][event.x] = 2
+        ## Shift and Left Click  => PLAYER
         elif event.num == 3 or event.state == 1024:
-            ## Right click
+            ## Mid click
             if not isPlayerLoc:
                 board[event.y][event.x] = 64
                 if player.isSet:
@@ -82,37 +130,66 @@ def placeThing(event):
             else:
                 board[event.y][event.x] = 0
                 player.isSet = False
-    #Affichage
+    #Display
     display()
 placeThing.lastDrag = -1
 
 
 def clearAll():
-    "Efface toute les cellules"
+    "Delete all cells"
     global board, player
-    #Ré-initialisation des étapes
+    #Re-initializing steps
     board = [[0 if is_not_border(i, j) else 1 for i in range(mapWidth)] for j in range(mapHeight)]
     player.isSet = False
-    #Affichage
+    #Display
     display()
 
+def texturesTxt():
+    path = os.curdir
+    path += "/textures/"
+    dirlist = os.listdir(path)
+    NO = [d for d in dirlist if d.startswith('wall_north')]
+    SO = [d for d in dirlist if d.startswith('wall_south')]
+    WE = [d for d in dirlist if d.startswith('wall_west')]
+    EA = [d for d in dirlist if d.startswith('wall_east')]
+    CO = [d for d in dirlist if d.startswith('coin')]
+    DO = [d for d in dirlist if d.startswith('door')]
+    dic = {'NO': NO, 'SO': SO, 'WE': WE, 'EA': EA, 'CO': CO, 'DO': DO}
+    string = ""
+    for key, value in dic.items():
+        string += key + " "
+        for v in value:
+            string += path + v + " "
+        string += "\n"
+    string += "F 116,84,20" + "\n"
+    string += "C 135,206,235" + "\n"
+    return(string)
+
 def saveFile():
+    named_tuple = time.localtime() # get struct_time
+    time_string = time.strftime("%m.%d.%Y_%H:%M:%S", named_tuple)
     if player.isSet:
-        mapFile = open("./map", "w")
-        mapFile.write(str(mapWidth) + " " + str(mapHeight) + "\n")
-        #Parcours du tableau de long en large
+        mapFile = open("./map" + time_string + ".cub" , "w")
+        mapFile.write(texturesTxt() + "\n")
+        #Path the table up and down
         for row, _ in enumerate(board):
             for column, _ in enumerate(board[0]):
-                #On trace seulement si la case est vivante
+                #Only trace if the square is alive
                 if board[row][column] == 1:
                     mapFile.write("1")
+                elif board[row][column] == 2:
+                    mapFile.write("2")
+                elif board[row][column] == 3:
+                    mapFile.write("3")
                 elif board[row][column] == 64:
-                    mapFile.write("@")
+                    mapFile.write(random.choice("NSWE"))
+                elif board[row][column] == 'C':
+                    mapFile.write("C")
                 else:
                     mapFile.write("0")
             mapFile.write("\n")
         mapFile.close()
-        print("You can now run:\n\t./wolf3d map")
+        print("You can now run:\n\t./cub3d map.cub")
         root.destroy()
     else:
         errorMsg.set("You need to set the spawn point!")
@@ -133,13 +210,13 @@ def setMapSize():
 def askSize():
     global askWin
     askWin = tk.Tk()
-    askWin.title("Quelles dimensions ?")
-    #Ajout de 2 champs de saisie à la fenêtre
+    askWin.title("What size?[4-400]")
+    #Added 2 input fields to the window
     askSize.e_w = tk.Entry(askWin)
     askSize.e_w.grid(row=1, column=1, padx=3, pady=3)
     askSize.e_h = tk.Entry(askWin)
     askSize.e_h.grid(row=1, column=3, padx=3, pady=3)
-    #Ajout d'un bouton à la fenêtre
+    #Adding a button to the window
     ok_button = tk.Button(askWin, text="OK", command=setMapSize)
     askWin.bind("<Return>", setMapSize)
     ok_button.grid(row=2, column=2, padx=3, pady=3)
@@ -170,7 +247,7 @@ if __name__ == "__main__":
 
     ######## INIT WINDOW ########
     root = tk.Tk()
-    root.title("Wolf3D map generator")
+    root.title("Cub3D map generator")
     root.configure(background="grey")
     ## Board canvas
     canvas = tk.Canvas(
@@ -182,15 +259,17 @@ if __name__ == "__main__":
         highlightthickness=0
     )
     canvas.grid(column=1, row=1, padx=2, pady=2, columnspan=100)
-    canvas.bind("<Button-1>", placeThing) #Localisation des clics dans le canvas3
+    canvas.bind("<Button-1>", placeThing) #Localization of clicks in the canvas3
     canvas.bind("<B1-Motion>", placeThing)
+    canvas.bind("<Button-2>", placeThing)
+    canvas.bind("<B2-Motion>", placeThing)
     canvas.bind("<Button-3>", placeThing)
     canvas.bind("<B3-Motion>", placeThing)
     ## Buttons frame
     userPart = tk.LabelFrame(
         root,
         bd=2,
-        text="Utilisateur",
+        text="User",
         bg="grey",
         fg="white",
         font=("Calibri", 12)
@@ -199,10 +278,10 @@ if __name__ == "__main__":
     ### Save button
     saveButton = tk.Button(
         userPart,
-        text="sauvegarder",
+        text="Save",
         command=saveFile,
-        bg="#545556",
-        fg="white",
+        bg="white",
+        fg="#545556",
         relief="flat",
         font=("Calibri", 12)
     )
@@ -210,10 +289,10 @@ if __name__ == "__main__":
     ### Clear button
     clearButton = tk.Button(
         userPart,
-        text="Tout effacer",
+        text="Erase everything",
         command=clearAll,
-        bg="#545556",
-        fg="white",
+        bg="white",
+        fg="#565454",
         relief="flat",
         font=("Calibri", 12)
     )
@@ -221,11 +300,10 @@ if __name__ == "__main__":
     ### Info frame
     devPart = tk.LabelFrame(
         root,
-        bd=2,
-        text="Développeur",
+        text="Control+LeftClick = Collectible\nShift+RightClick = OpenDoor\nRightClick = ClosedDoor\nMidClick = Player\nLeftClick=Wall",
         bg="grey",
         fg="white",
-        font=("Calibri", 12)
+        font=("Calibri", 12),
     )
     devPart.grid(column=99, row=2, padx=5, pady=2, sticky=tk.W)
     errorMsg = tk.StringVar()
