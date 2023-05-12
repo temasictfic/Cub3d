@@ -140,6 +140,7 @@ def clearAll():
     global board, player
     #Re-initializing steps
     board = [[0 if is_not_border(i, j) else 1 for i in range(mapWidth)] for j in range(mapHeight)]
+    #board = [[0 for i in range(mapWidth)] for j in range(mapHeight)]
     player.isSet = False
     #Display
     display()
@@ -244,7 +245,7 @@ if __name__ == "__main__":
         sys.exit(0)
     caseSize = int(max(-0.15 * max(mapWidth, mapHeight * (16/9)) + 30, 4))
     board = [[0 if is_not_border(i, j) else 1 for i in range(mapWidth)] for j in range(mapHeight)]
-
+    #board = [[0 for i in range(mapWidth)] for j in range(mapHeight)]
     ######## INIT WINDOW ########
     root = tk.Tk()
     root.title("Cub3D map generator")

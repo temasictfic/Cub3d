@@ -6,7 +6,7 @@
 /*   By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 04:14:09 by sciftci           #+#    #+#             */
-/*   Updated: 2023/05/11 18:37:17 by sciftci          ###   ########.fr       */
+/*   Updated: 2023/05/12 13:04:09 by sciftci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,9 @@ void	move_player(t_vars *vars)
 
 int	key_press(int keycode, t_vars *vars)
 {
-	if (keycode == KEY_A)
+	if (keycode == KEY_A || keycode == KEY_LEFT)
 		vars->player.move.x = -1;
-	else if (keycode == KEY_D)
+	else if (keycode == KEY_D || keycode == KEY_RIGHT)
 		vars->player.move.x = 1;
 	else if (keycode == KEY_W)
 		vars->player.move.y = -1;
@@ -91,7 +91,8 @@ int	key_press(int keycode, t_vars *vars)
 
 int	key_release(int keycode, t_vars *vars)
 {
-	if (keycode == KEY_A || keycode == KEY_D)
+	if (keycode == KEY_A || keycode == KEY_D || keycode == KEY_LEFT
+		|| keycode == KEY_RIGHT)
 		vars->player.move.x = 0;
 	else if (keycode == KEY_W || keycode == KEY_S)
 		vars->player.move.y = 0;

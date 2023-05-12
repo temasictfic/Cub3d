@@ -6,7 +6,7 @@
 /*   By: sciftci <sciftci@student.42kocaeli.com.tr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 04:10:27 by sciftci           #+#    #+#             */
-/*   Updated: 2023/05/12 09:21:07 by sciftci          ###   ########.fr       */
+/*   Updated: 2023/05/12 13:01:28 by sciftci          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ enum				e_keycodes
 	KEY_E = 14,
 	KEY_F = 3,
 	KEY_Q = 12,
+	KEY_LEFT = 123,
+	KEY_RIGHT = 124,
 };
 
 enum				e_window
