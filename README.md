@@ -14,12 +14,10 @@ Welcome to Cub3d! This is a 3D maze game developed using the C programming langu
 ## Features
 
 - Full 3D graphics rendering using raycasting.
-- Textured walls and sprites for a realistic environment.
+- Textured walls and animated sprites for a realistic environment.
 - Real-time player movement and interactions.
 - Adjustable screen resolution and field of view.
 - Map parsing from a configuration file.
-- Dynamic lighting and shadows.
-- Sound effects to enhance the gameplay experience.
 
 ## Installation
 
@@ -44,14 +42,15 @@ Note: Replace <path_to_map_file.cub> with the path to your custom map file.
 
 ## Usage
 
-Upon running the game, you will be placed in the maze environment. Your goal is to navigate through the maze and find the exit while avoiding obstacles and enemies. Use the controls mentioned below to move around and interact with the environment.
+Upon running the game, you will be placed in the maze environment. Your goal is to navigate through the maze and collect collectibles. Use the controls mentioned below to move around and interact with the environment.
 
 ## Controls
 
 - **W**: Move forward
-- **A**: Rotate left
+- **A**: Move left
 - **S**: Move backward
-- **D**: Rotate right
-- **Left Arrow**: Look left
-- **Right Arrow**: Look right
+- **D**: Move right
+- **E**: Rotate right
+- **Q**: Rotate left
+- **F**: Open/Close door
 - **ESC**: Exit the game
